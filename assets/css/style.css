@@ -434,6 +434,128 @@ header .navbar ul li a:hover {
 .resumebtn .btn:hover i {
   transform: translateX(5px);
 }
+/* dsd */
+.cdbutton {
+  margin-top: 1rem;
+  margin-left: 0rem;
+  margin-right: 40rem;
+}
+.cdbutton .btn {
+  padding: 1rem 2rem;
+  border-radius: 0.5em;
+  transition: 0.3s;
+  color: #fff;
+  background: #2506ad;
+  box-shadow: 0px 5px 10px rgba(48, 68, 247, 0.6);
+  font-family: "Nunito", sans-serif;
+}
+.cdbutton .btn span {
+  font-weight: 400;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+}
+.cdbutton .btn i {
+  margin-left: 0rem;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+.cdbutton .btn:hover {
+  background: #1a047e;
+}
+.cdbutton .btn:hover i {
+  transform: translateX(5px);
+}
+/* done */
+.cdgit {
+  margin-top: -1.6rem;
+  margin-left: 0rem;
+}
+.cdgit .btn {
+  padding: 1rem 2rem;
+  border-radius: 0.5em;
+  transition: 0.3s;
+  color: #fff;
+  background: #2506ad;
+  box-shadow: 0px 5px 10px rgba(48, 68, 247, 0.6);
+  font-family: "Nunito", sans-serif;
+}
+.cdgit .btn span {
+  font-weight: 400;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+}
+.cdgit .btn i {
+  margin-left: 0rem;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+.cdgit .btn:hover {
+  background: #1a047e;
+}
+.cdgit .btn:hover i {
+  transform: translateX(5px);
+}
+/* hehe */
+.aibutton {
+  margin-top: 1rem;
+  margin-left: 0rem;
+  margin-right: 40rem;
+}
+.aibutton .btn {
+  padding: 1rem 2rem;
+  border-radius: 0.5em;
+  transition: 0.3s;
+  color: #fff;
+  background: #2506ad;
+  box-shadow: 0px 5px 10px rgba(48, 68, 247, 0.6);
+  font-family: "Nunito", sans-serif;
+}
+.aibutton .btn span {
+  font-weight: 400;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+}
+.aibutton .btn i {
+  margin-left: 0rem;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+.aibutton .btn:hover {
+  background: #1a047e;
+}
+.aibutton .btn:hover i {
+  transform: translateX(5px);
+}
+/* done */
+.aigit {
+  margin-top: -1.6rem;
+  margin-left: 0rem;
+}
+.aigit .btn {
+  padding: 1rem 2rem;
+  border-radius: 0.5em;
+  transition: 0.3s;
+  color: #fff;
+  background: #2506ad;
+  box-shadow: 0px 5px 10px rgba(48, 68, 247, 0.6);
+  font-family: "Nunito", sans-serif;
+}
+.aigit .btn span {
+  font-weight: 400;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+}
+.aigit .btn i {
+  margin-left: 0rem;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+.aigit .btn:hover {
+  background: #1a047e;
+}
+.aigit .btn:hover i {
+  transform: translateX(5px);
+}
 /* about media queries starts*/
 @media screen and (max-width: 600px) {
   .about .row .image {
@@ -531,7 +653,109 @@ header .navbar ul li a:hover {
 }
 /* skills media queries ends*/
 /* skills section ends */
+.Projects {
+  background: #e5ecfb;
+  min-height: 80vh;
+}
+.Projects .qoute {
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+.Projects .box-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.Projects .box-container .box {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  border-radius: 0.5rem;
+  box-shadow: 0.2rem 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  margin-top: 2rem;
+  overflow: hidden;
+  transition: 0.3s;
+  background: rgb(252, 252, 252);
+}
+.Projects .box-container .box:hover {
+  transform: scale(1.03);
+  box-shadow: 1rem 0.5rem 1.2rem rgba(0, 0, 0, 0.3);
+}
+.Projects .box-container .box .image {
+  flex: 1 1 20rem;
+  width: 100%;
+}
+.Projects .box-container .box img {
+  object-fit: cover;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.Projects .box-container .box .content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  flex-wrap: wrap;
+  flex: 1 1 70rem;
+}
+.Projects .box-container .box .content h3 {
+  font-size: 2.5rem;
+  color: #012970;
+  padding: 0.5rem 0;
+  font-weight: 600;
+  text-align: left;
+  margin-left: 1rem;
+}
+.Projects .box-container .box .content p {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  text-align: left;
+}
+.Projects h4 {
+  font-size: 2rem;
+  color: rgb(34, 109, 0);
+  text-align: left;
+  margin: 1rem;
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+}
 
+/* education media queries starts*/
+@media screen and (max-width: 600px) {
+  .Projects .box-container .box {
+    flex-direction: column;
+    width: 100%;
+  }
+  .Projects .box-container .box .image {
+    width: 100%;
+    height: 25rem;
+  }
+  .Projects .box-container .box img {
+    width: 100%;
+  }
+  .Projects .box-container .box .content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    flex-wrap: wrap;
+    flex: 0;
+  }
+  .Projects .btns {
+    margin-top: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    flex-wrap: wrap;
+  }
+}
 /* education section starts */
 .education {
   background: #e5ecfb;
@@ -554,7 +778,7 @@ header .navbar ul li a:hover {
 .education .box-container .box {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  width: 85%;
   border-radius: 0.5rem;
   box-shadow: 0.2rem 0.5rem 1rem rgba(0, 0, 0, 0.2);
   text-align: center;
@@ -1084,10 +1308,166 @@ form .button-area {
 }
 /* contact section media queries ends */
 /* contact section ends */
+/* contact section starts */
+.contact {
+  background: #e5ecfb;
+  min-height: 60vh;
+}
+.contact .container {
+  max-width: 1050px;
+  width: 100%;
+  background: #fff;
+  border-radius: 1.5rem;
+  margin: 2rem 5rem;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+.contact .container .content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.5rem 2rem;
+}
+.contact .content .image-box {
+  max-width: 60%;
+  margin-left: 4rem;
+}
+.contact .content .image-box img {
+  width: 100%;
+  height: 40rem;
+  position: relative;
+}
+.contact .content form {
+  width: 45%;
+  margin-right: 3.5rem;
+}
+form .form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.form-group .field {
+  height: 50px;
+  display: flex;
+  position: relative;
+  margin: 1rem;
+  width: 100%;
+}
+form i {
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  color: rgb(51, 51, 51);
+  font-size: 17px;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+form .field input,
+form .message textarea {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  padding: 0 16px 0 48px;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  border-radius: 5px;
+  border: 1px solid rgb(51, 51, 51);
+  background: #e5ecfb;
+}
+.field input::placeholder,
+.message textarea::placeholder {
+  color: rgb(51, 51, 51);
+}
+.field input:focus,
+.message textarea:focus {
+  padding-left: 47px;
+  border: 2px solid rgb(115, 3, 167);
+}
+.field input:focus ~ i,
+.message textarea:focus ~ i {
+  color: rgb(115, 3, 167);
+}
+form .message {
+  position: relative;
+  margin: 1rem;
+  width: 100%;
+}
+form .message i {
+  top: 25px;
+  font-size: 20px;
+  left: 15px;
+}
+form .message textarea {
+  min-height: 130px;
+  max-height: 230px;
+  max-width: 100%;
+  min-width: 100%;
+  padding: 12px 20px 0 48px;
+}
+form .message textarea::-webkit-scrollbar {
+  width: 0px;
+}
+form .button-area {
+  display: flex;
+  float: right;
+  flex-direction: row-reverse;
+}
+.button-area button {
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 13px 25px;
+  background: #2506ad;
+  box-shadow: 0px 5px 10px rgba(48, 68, 247, 0.6);
+  transition: 0.3s ease;
+  font-family: "Nunito", sans-serif;
+}
+.button-area button:hover {
+  background: #421cecf5;
+}
+.button-area span {
+  font-size: 17px;
+  padding: 1rem;
+  display: none;
+}
+.button-area button i {
+  position: relative;
+  top: 6px;
+  left: 2px;
+  font-size: 1.5rem;
+  transition: 0.3s;
+  color: #fff;
+}
+.button-area button:hover i {
+  left: 8px;
+}
+/* contact section media queries starts */
+@media (max-width: 900px) {
+  .contact {
+    min-height: 70vh;
+  }
+  .contact .container {
+    margin: 3rem 0 2rem 0;
+  }
+  .contact .container .content {
+    padding: 18px 12px;
+  }
+  .contact .content .image-box {
+    display: none;
+  }
+  .contact .content form {
+    width: 100%;
+    margin-right: 2rem;
+  }
+}
+/* contact section media queries ends */
+/* contact section ends */
 
 /* footer section starts */
 .footer {
-  min-height: auto;
+  min-height: 10rem;
   padding-top: 0;
   background: rgb(0, 1, 43);
 }
