@@ -3,31 +3,36 @@ import { profile } from "../data/profile";
 
 const links = [
   { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
+  { href: "#experience", label: "Story" },
   { href: "#work", label: "Work" },
-  { href: "#education", label: "Education" },
+  { href: "#education", label: "Learning" },
   { href: "#honors", label: "Honors" },
-  { href: "#contact", label: "Contact" },
+  { href: "#contact", label: "Connect" },
 ];
 
 export function Footer() {
   return (
-    <footer className="relative z-10 border-t border-white/5 bg-background/40 backdrop-blur-xl">
-      <div className="container-page grid grid-cols-1 gap-8 py-12 md:grid-cols-3 md:items-center md:gap-6">
+    <footer className="relative z-10 border-t border-gold-400/10 bg-background/40 backdrop-blur-xl">
+      <div className="container-page grid grid-cols-1 gap-8 py-14 md:grid-cols-3 md:items-center md:gap-6">
         <div>
-          <a href="#home" className="inline-flex items-center gap-2 font-display font-bold">
+          <a href="#home" className="inline-flex items-center gap-3 font-display font-medium">
             <span
-              className="grid h-9 w-9 place-items-center rounded-xl text-sm text-white"
-              style={{ background: "linear-gradient(135deg, #8b5cf6, #22d3ee)" }}
+              className="grid h-9 w-9 place-items-center rounded-full text-sm"
+              style={{
+                background: "linear-gradient(135deg, #ff9d4d 0%, #d4af37 100%)",
+                color: "#0b0710",
+              }}
             >
-              R
+              <span className="devanagari text-[18px] -translate-y-px">र</span>
             </span>
             <span className="text-base">
-              Rohan<span className="text-brand-cyan">.</span>
+              Rohan<span className="text-gold-400">.</span>
             </span>
           </a>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Built from scratch in Mumbai · React, Tailwind, three.js.
+          <p className="mt-4 text-[13.5px] leading-relaxed text-muted-foreground">
+            Built with chai in Mumbai.
+            <br />
+            React, Tailwind, three.js — and a lot of late nights.
           </p>
         </div>
 
@@ -36,7 +41,7 @@ export function Footer() {
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-muted-foreground transition hover:text-brand-cyan"
+              className="text-[13.5px] text-muted-foreground transition hover:text-gold-400"
             >
               {l.label}
             </a>
@@ -56,7 +61,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener"
                 aria-label={label}
-                className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/5 text-muted-foreground transition hover:-translate-y-0.5 hover:border-brand-violet hover:text-brand-cyan"
+                className="grid h-9 w-9 place-items-center rounded-full border border-gold-400/25 bg-white/[0.025] text-muted-foreground transition hover:-translate-y-0.5 hover:border-gold-400 hover:text-gold-400"
               >
                 <Icon className="size-4" />
               </a>
@@ -64,8 +69,9 @@ export function Footer() {
           ))}
         </ul>
       </div>
-      <div className="container-page border-t border-dashed border-white/5 py-5 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Rohan Ajay Ramani — all rights reserved.
+      <div className="container-page border-t border-dashed border-gold-400/15 py-5 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+        <span className="devanagari mr-3 normal-case tracking-normal text-gold-400/70">© मुंबई</span>
+        © {new Date().getFullYear()} Rohan Ajay Ramani · All rights reserved
       </div>
     </footer>
   );

@@ -1,6 +1,7 @@
 import { ArrowRight, ArrowUpRight, ChevronDown, Github, Linkedin, Mail } from "lucide-react";
 import { Suspense, lazy, useEffect, useState } from "react";
 import { profile } from "../data/profile";
+import { OmGlyph } from "./decor/Motifs";
 
 const HeroScene = lazy(() => import("./HeroScene").then((m) => ({ default: m.HeroScene })));
 
@@ -9,7 +10,7 @@ export function Hero() {
   useEffect(() => {
     const t = setInterval(
       () => setRoleIndex((i) => (i + 1) % profile.rotatingRoles.length),
-      2200,
+      2400,
     );
     return () => clearInterval(t);
   }, []);
@@ -19,16 +20,17 @@ export function Hero() {
       id="home"
       className="relative isolate min-h-[100svh] overflow-hidden pt-28 md:pt-36"
     >
-      {/* 3D backdrop — right half on desktop, full top on mobile, both with fades */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[55%] md:block">
+      {/* 3D scene — full background, fades in from center-right */}
+      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[60%] md:block">
         <Suspense fallback={null}>
           <HeroScene />
         </Suspense>
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-background/40 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80" />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-background/30 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/85" />
       </div>
 
-      <div className="pointer-events-none relative mx-auto block h-[260px] w-full md:hidden">
+      {/* Mobile scene on top */}
+      <div className="pointer-events-none relative mx-auto block h-[300px] w-full md:hidden">
         <Suspense fallback={null}>
           <HeroScene />
         </Suspense>
@@ -36,54 +38,58 @@ export function Hero() {
       </div>
 
       {/* Foreground content */}
-      <div className="container-page relative z-20 grid grid-cols-1 items-center gap-12 pb-24 md:grid-cols-[1.05fr_0.95fr] md:pb-32">
+      <div className="container-page relative z-20 grid grid-cols-1 items-center gap-12 pb-24 md:grid-cols-[1.1fr_0.9fr] md:pb-32">
         <div>
-          <div className="kicker mb-6 hero-in" style={{ animationDelay: "0ms" }}>
-            <span className="relative grid h-2 w-2 place-items-center">
-              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/60" />
-              <span className="relative h-2 w-2 rounded-full bg-emerald-400" />
+          {/* Devanagari eyebrow */}
+          <div className="hero-in mb-7 flex items-center gap-3" style={{ animationDelay: "0ms" }}>
+            <span className="devanagari text-2xl text-gold-400" aria-hidden>
+              नमस्ते
             </span>
-            {profile.status.label} · {profile.status.detail}
+            <span className="h-px w-10 bg-gradient-to-r from-gold-400/60 to-transparent" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              Namaste — welcome
+            </span>
           </div>
 
           <h1
-            className="heading-display text-balance text-[clamp(2.4rem,6.5vw,4.6rem)] leading-[1.02] hero-in"
-            style={{ animationDelay: "80ms" }}
+            className="heading-display hero-in text-balance text-[clamp(2.6rem,7vw,5.2rem)] leading-[0.96]"
+            style={{ animationDelay: "80ms", fontVariationSettings: "'opsz' 144" }}
           >
-            <span className="text-foreground">Hi, I'm </span>
-            <span className="text-grad">Rohan&nbsp;Ajay</span>
+            <span className="text-foreground">I'm </span>
+            <span className="text-grad italic">Rohan&nbsp;Ajay</span>
             <br />
-            <span className="text-grad-warm">Ramani.</span>
+            <span className="text-foreground">Ramani</span>
+            <span className="text-grad-warm">.</span>
           </h1>
 
           <p
-            className="mt-5 max-w-[520px] text-balance text-[17px] text-muted-foreground hero-in"
+            className="hero-in mt-7 max-w-[560px] font-sans text-balance text-[18px] leading-[1.55] text-muted-foreground"
             style={{ animationDelay: "200ms" }}
           >
-            <span className="relative inline-block min-w-[8.5ch] align-baseline">
+            <span className="relative inline-block min-w-[9ch] align-baseline">
               <span
                 key={roleIndex}
-                className="absolute inset-0 text-grad font-semibold animate-fade-up"
+                className="absolute inset-0 text-grad font-semibold italic font-display animate-fade-up"
+                style={{ fontStyle: "italic" }}
               >
                 {profile.rotatingRoles[roleIndex]}
               </span>
-              <span className="invisible font-semibold">{profile.rotatingRoles[roleIndex]}</span>
+              <span className="invisible font-display font-semibold italic">
+                {profile.rotatingRoles[roleIndex]}
+              </span>
             </span>{" "}
             Currently building{" "}
-            <span className="font-semibold text-foreground">Fresh &amp; Select Gro</span>, fresh
+            <span className="font-medium text-foreground">Fresh &amp; Select Gro</span>, fresh
             off 2.5+ years of{" "}
-            <span className="font-semibold text-foreground">Data &amp; Tech at JPMorganChase</span>.
+            <span className="font-medium text-foreground">Data &amp; Tech at JPMorganChase</span>
+            <span className="text-gold-400">.</span>
           </p>
 
           <div
-            className="mt-9 flex flex-wrap items-center gap-3 hero-in"
+            className="hero-in mt-9 flex flex-wrap items-center gap-3"
             style={{ animationDelay: "300ms" }}
           >
-            <a
-              href="#experience"
-              className="group inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/30 transition hover:-translate-y-0.5 hover:shadow-violet-500/50"
-              style={{ background: "linear-gradient(135deg, #8b5cf6, #22d3ee)" }}
-            >
+            <a href="#experience" className="btn-saffron group">
               See my story
               <ArrowRight className="size-4 transition group-hover:translate-x-0.5" />
             </a>
@@ -91,7 +97,7 @@ export function Hero() {
               href={profile.resume}
               target="_blank"
               rel="noopener"
-              className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-brand-violet"
+              className="btn-ghost group"
             >
               Résumé
               <ArrowUpRight className="size-4 transition group-hover:rotate-45" />
@@ -99,7 +105,7 @@ export function Hero() {
           </div>
 
           <ul
-            className="mt-10 flex items-center gap-3 hero-in"
+            className="hero-in mt-10 flex items-center gap-3"
             style={{ animationDelay: "400ms" }}
           >
             {[
@@ -113,7 +119,7 @@ export function Hero() {
                   target="_blank"
                   rel="noopener"
                   aria-label={label}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/[0.04] text-foreground/80 transition hover:-translate-y-0.5 hover:border-brand-violet hover:text-brand-cyan"
+                  className="grid h-10 w-10 place-items-center rounded-full border border-gold-400/25 bg-white/[0.025] text-foreground/80 transition hover:-translate-y-0.5 hover:border-gold-400 hover:text-gold-400"
                 >
                   <Icon className="size-4" />
                 </a>
@@ -122,53 +128,64 @@ export function Hero() {
           </ul>
         </div>
 
-        {/* Currently card — sits on top of the 3D backdrop */}
+        {/* "Currently" card — editorial */}
         <aside
-          className="relative hidden md:block hero-in"
+          className="hero-in relative hidden md:block"
           style={{ animationDelay: "450ms" }}
         >
-          <div className="relative ml-auto max-w-[420px] glass rounded-3xl p-6 shadow-2xl shadow-black/30">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+          <div className="relative ml-auto max-w-[420px] glass rounded-[28px] p-7 shadow-2xl shadow-black/40">
+            {/* Om watermark in corner */}
+            <OmGlyph className="absolute right-5 top-4 text-4xl text-gold-400/25" />
+            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-gold-400">
               Currently
             </p>
-            <h3 className="mt-2 heading-display text-2xl">Engineer turned operator.</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Building <span className="text-foreground">Fresh &amp; Select Gro</span> across
-              the Mumbai Metropolitan Region. Putting{" "}
-              <span className="text-foreground">KyRo Core</span> together brick by brick. Two
-              published papers along the way.
+            <h3 className="heading-display mt-3 text-3xl leading-[1.05]">
+              Engineer turned <em className="text-grad italic">operator</em>.
+            </h3>
+            <p className="mt-4 text-[14px] leading-relaxed text-muted-foreground">
+              Building <span className="text-foreground">Fresh &amp; Select Gro</span> across the
+              Mumbai Metropolitan Region — and putting{" "}
+              <span className="text-foreground">KyRo Core</span> together brick by brick.
             </p>
-            <div className="mt-4 grid grid-cols-3 gap-3 border-t border-white/10 pt-4">
+            <div className="mt-5 grid grid-cols-3 gap-3 border-t border-gold-400/15 pt-4">
               <div>
-                <p className="font-display text-2xl font-bold text-grad">2.5y</p>
-                <p className="text-[11px] text-muted-foreground">at JPMC</p>
+                <p className="heading-display text-3xl font-medium text-grad">2.5y</p>
+                <p className="mt-0.5 text-[10.5px] font-mono uppercase tracking-[0.16em] text-muted-foreground">
+                  at JPMC
+                </p>
               </div>
               <div>
-                <p className="font-display text-2xl font-bold text-grad">6k+</p>
-                <p className="text-[11px] text-muted-foreground">Mumbai Ignite</p>
+                <p className="heading-display text-3xl font-medium text-grad">6k+</p>
+                <p className="mt-0.5 text-[10.5px] font-mono uppercase tracking-[0.16em] text-muted-foreground">
+                  Mumbai Ignite
+                </p>
               </div>
               <div>
-                <p className="font-display text-2xl font-bold text-grad">9.76</p>
-                <p className="text-[11px] text-muted-foreground">SRM CGPA</p>
+                <p className="heading-display text-3xl font-medium text-grad">9.76</p>
+                <p className="mt-0.5 text-[10.5px] font-mono uppercase tracking-[0.16em] text-muted-foreground">
+                  SRM CGPA
+                </p>
               </div>
             </div>
           </div>
         </aside>
       </div>
 
+      {/* Scroll cue */}
       <a
         href="#about"
-        className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground"
+        className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.26em] text-muted-foreground"
         style={{ animation: "scroll-cue 2.2s ease-in-out infinite" }}
       >
         Scroll
-        <ChevronDown className="size-3 text-brand-cyan" />
+        <ChevronDown className="size-3 text-gold-400" />
       </a>
+
       <style>{`
         .hero-in {
           opacity: 0;
-          transform: translateY(16px);
-          animation: hero-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          transform: translateY(18px);
+          animation: hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
         @keyframes hero-in {
           to { opacity: 1; transform: translateY(0); }

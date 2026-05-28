@@ -17,16 +17,36 @@ import { ScrollTop } from "./components/ScrollTop";
 export default function App() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.05,
+      duration: 1.35,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.6,
     });
+
+    // Intercept anchor clicks so smooth scroll feels intentional
+    const onAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const a = target.closest("a[href^='#']") as HTMLAnchorElement | null;
+      if (!a) return;
+      const href = a.getAttribute("href");
+      if (!href || href === "#") return;
+      const el = document.querySelector(href);
+      if (!el) return;
+      e.preventDefault();
+      lenis.scrollTo(el as HTMLElement, { offset: -80, duration: 1.6 });
+    };
+    document.addEventListener("click", onAnchorClick);
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
-    return () => lenis.destroy();
+    return () => {
+      document.removeEventListener("click", onAnchorClick);
+      lenis.destroy();
+    };
   }, []);
 
   return (

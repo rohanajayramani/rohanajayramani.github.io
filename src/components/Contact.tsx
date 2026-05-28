@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 import { profile } from "../data/profile";
 import { SectionHead } from "./SectionHead";
+import { Mandala, OmGlyph } from "./decor/Motifs";
 
 export function Contact() {
   const [sending, setSending] = useState(false);
@@ -21,32 +22,35 @@ export function Contact() {
     <section id="contact" className="section-pad container-page">
       <SectionHead
         num="07"
-        kicker="Contact"
-        title="Let's build something."
+        kicker="Connect"
+        title="Let's build"
+        titleItalic="something"
         subtitle="An idea, a role, or a hello — my inbox is open."
       />
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-[0.9fr_1.1fr]">
         {/* Direct */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55 }}
-          className="glass relative overflow-hidden rounded-3xl p-7"
+          className="glass relative overflow-hidden rounded-[26px] p-8"
         >
-          <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-brand-cyan/15 blur-3xl" />
-          <h3 className="relative font-display text-xl font-semibold">Reach me directly</h3>
+          <Mandala className="absolute -right-12 -top-12 h-48 w-48 text-gold-400 opacity-[0.08] animate-spin-slow" />
+          <OmGlyph className="absolute right-6 bottom-5 text-5xl text-gold-400/15" />
+
+          <h3 className="heading-display relative text-[22px] font-medium">Reach me directly</h3>
           <div className="relative mt-5 space-y-1">
             <a
               href={profile.socials.email}
-              className="group flex items-center gap-3 border-b border-dashed border-white/10 py-3 text-sm transition hover:text-brand-cyan"
+              className="group flex items-center gap-3 border-b border-dashed border-gold-400/15 py-3 text-[14px] transition hover:text-gold-400"
             >
-              <span className="grid h-10 w-10 place-items-center rounded-xl border border-brand-violet/30 bg-brand-violet/10 text-brand-cyan">
+              <span className="grid h-10 w-10 place-items-center rounded-xl border border-gold-400/25 bg-gold-400/10 text-gold-400">
                 <Mail className="size-4" />
               </span>
               <span className="flex flex-col">
-                <small className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                <small className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                   Email
                 </small>
                 <span>{profile.emailAddress}</span>
@@ -55,24 +59,24 @@ export function Contact() {
             </a>
             <a
               href={profile.socials.phone}
-              className="group flex items-center gap-3 border-b border-dashed border-white/10 py-3 text-sm transition hover:text-brand-cyan"
+              className="group flex items-center gap-3 border-b border-dashed border-gold-400/15 py-3 text-[14px] transition hover:text-gold-400"
             >
-              <span className="grid h-10 w-10 place-items-center rounded-xl border border-brand-violet/30 bg-brand-violet/10 text-brand-cyan">
+              <span className="grid h-10 w-10 place-items-center rounded-xl border border-gold-400/25 bg-gold-400/10 text-gold-400">
                 <Phone className="size-4" />
               </span>
               <span className="flex flex-col">
-                <small className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                <small className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                   Phone
                 </small>
                 <span>{profile.phoneNumber}</span>
               </span>
             </a>
-            <div className="group flex items-center gap-3 py-3 text-sm">
-              <span className="grid h-10 w-10 place-items-center rounded-xl border border-brand-violet/30 bg-brand-violet/10 text-brand-cyan">
+            <div className="group flex items-center gap-3 py-3 text-[14px]">
+              <span className="grid h-10 w-10 place-items-center rounded-xl border border-gold-400/25 bg-gold-400/10 text-gold-400">
                 <MapPin className="size-4" />
               </span>
               <span className="flex flex-col">
-                <small className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                <small className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                   Location
                 </small>
                 <span>{profile.location}</span>
@@ -92,7 +96,7 @@ export function Contact() {
                 href={href}
                 target="_blank"
                 rel="noopener"
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 text-muted-foreground transition hover:-translate-y-0.5 hover:border-brand-violet hover:text-brand-cyan"
+                className="grid h-10 w-10 place-items-center rounded-full border border-gold-400/25 bg-white/[0.025] text-muted-foreground transition hover:-translate-y-0.5 hover:border-gold-400 hover:text-gold-400"
               >
                 <Icon className="size-4" />
               </a>
@@ -102,14 +106,14 @@ export function Contact() {
 
         {/* Form */}
         <motion.form
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55, delay: 0.05 }}
           action="https://formsubmit.co/rohanajayramani@gmail.com"
           method="POST"
           onSubmit={() => setSending(true)}
-          className="glass grid gap-4 rounded-3xl p-7"
+          className="glass grid gap-4 rounded-[26px] p-8"
         >
           <input type="hidden" name="_subject" value="New message from your portfolio" />
           <input type="hidden" name="_template" value="table" />
@@ -133,12 +137,7 @@ export function Contact() {
             textarea
             required
           />
-          <button
-            disabled={sending}
-            type="submit"
-            className="group mt-1 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/30 transition hover:-translate-y-0.5 hover:shadow-violet-500/50 disabled:opacity-60"
-            style={{ background: "linear-gradient(135deg, #8b5cf6, #22d3ee)" }}
-          >
+          <button disabled={sending} type="submit" className="btn-saffron mt-1 justify-center">
             {sending ? "Sending…" : "Send message"}
             <Send className="size-4 transition group-hover:translate-x-0.5" />
           </button>
@@ -161,7 +160,7 @@ type FieldProps = {
 function Field({ id, label, name, type = "text", placeholder, required, textarea }: FieldProps) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+      <label htmlFor={id} className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
         {label}
       </label>
       {textarea ? (
@@ -171,7 +170,7 @@ function Field({ id, label, name, type = "text", placeholder, required, textarea
           placeholder={placeholder}
           required={required}
           rows={5}
-          className="w-full rounded-2xl border border-white/15 bg-background/50 px-4 py-3 text-sm outline-none ring-brand-violet/40 transition focus:border-brand-violet focus:ring-4"
+          className="w-full rounded-2xl border border-gold-400/25 bg-background/40 px-4 py-3 text-[14px] outline-none ring-saffron-400/30 transition placeholder:text-muted-foreground focus:border-saffron-400 focus:ring-4"
         />
       ) : (
         <input
@@ -180,7 +179,7 @@ function Field({ id, label, name, type = "text", placeholder, required, textarea
           type={type}
           placeholder={placeholder}
           required={required}
-          className="w-full rounded-2xl border border-white/15 bg-background/50 px-4 py-3 text-sm outline-none ring-brand-violet/40 transition focus:border-brand-violet focus:ring-4"
+          className="w-full rounded-2xl border border-gold-400/25 bg-background/40 px-4 py-3 text-[14px] outline-none ring-saffron-400/30 transition placeholder:text-muted-foreground focus:border-saffron-400 focus:ring-4"
         />
       )}
     </div>
