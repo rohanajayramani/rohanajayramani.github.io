@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 230 30% 4%;
+    --foreground: 220 14% 96%;
+
+    --card: 230 28% 7%;
+    --card-foreground: 220 14% 96%;
+
+    --primary: 255 87% 68%;
+    --primary-foreground: 230 30% 4%;
+
+    --secondary: 230 20% 12%;
+    --secondary-foreground: 220 14% 96%;
+
+    --muted: 230 20% 12%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 192 95% 67%;
+    --accent-foreground: 230 30% 4%;
+
+    --border: 230 20% 16%;
+    --input: 230 20% 16%;
+    --ring: 255 87% 68%;
+
+    --radius: 1rem;
+  }
+
+  html.light {
+    --background: 220 24% 98%;
+    --foreground: 230 30% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 230 30% 9%;
+    --primary: 255 76% 56%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 16% 94%;
+    --secondary-foreground: 230 30% 9%;
+    --muted: 220 16% 94%;
+    --muted-foreground: 230 12% 40%;
+    --accent: 192 88% 42%;
+    --accent-foreground: 0 0% 100%;
+    --border: 220 16% 88%;
+    --input: 220 16% 88%;
+    --ring: 255 76% 56%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter", system-ui, sans-serif;
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply min-h-screen overflow-x-hidden bg-background;
+  }
+
+  ::selection {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--accent)));
+    border-radius: 999px;
+    border: 2px solid hsl(var(--background));
+  }
+}
+
+@layer components {
+  .glass {
+    @apply border border-white/10 bg-white/5 backdrop-blur-xl;
+  }
+  html.light .glass {
+    @apply border-black/10 bg-white/60;
+  }
+
+  .ring-conic {
+    background: conic-gradient(
+      from 0deg,
+      hsl(var(--primary) / 0.7),
+      hsl(var(--accent) / 0.7),
+      #f59e0b cc,
+      hsl(var(--primary) / 0.7)
+    );
+  }
+
+  .text-grad {
+    background: linear-gradient(135deg, #c4b5fd 0%, #67e8f9 55%, #fde68a 110%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  html.light .text-grad {
+    background: linear-gradient(135deg, #6d28d9 0%, #0891b2 55%, #c2410c 110%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-grad-warm {
+    background: linear-gradient(135deg, #fda4af 0%, #fdba74 50%, #fde68a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .kicker {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground backdrop-blur;
+  }
+  html.light .kicker {
+    @apply border-black/10 bg-black/5;
+  }
+
+  .heading-display {
+    @apply font-display font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .container-page {
+    @apply mx-auto w-full max-w-[1180px] px-6;
+  }
+
+  .section-pad {
+    @apply py-24 md:py-32;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .mask-fade-edges {
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.45) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.45) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 80%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
