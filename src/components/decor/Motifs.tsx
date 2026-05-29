@@ -1,9 +1,9 @@
-// Lightweight SVG-based Indic motifs. No external deps, fully scalable.
+// Indo-futurist SVG motifs. Sharper, more geometric than the previous soft mandalas.
 
 type SvgProps = React.SVGProps<SVGSVGElement>;
 
-/* ---------- Mandala — concentric ornament for backgrounds + dividers ---------- */
-export function Mandala({ className, ...rest }: SvgProps) {
+/* ---------- Sri Yantra — interlocking triangles, the classic sacred geometry ---------- */
+export function SriYantra({ className, ...rest }: SvgProps) {
   return (
     <svg
       viewBox="0 0 200 200"
@@ -14,19 +14,20 @@ export function Mandala({ className, ...rest }: SvgProps) {
       className={className}
       {...rest}
     >
-      <circle cx="100" cy="100" r="98" opacity=".22" />
-      <circle cx="100" cy="100" r="80" opacity=".35" />
-      <circle cx="100" cy="100" r="62" opacity=".5" />
-      <circle cx="100" cy="100" r="44" opacity=".7" />
-      <circle cx="100" cy="100" r="26" opacity=".9" />
-      <circle cx="100" cy="100" r="3" fill="currentColor" stroke="none" />
-      {[...Array(24)].map((_, i) => {
-        const a = (i / 24) * Math.PI * 2;
-        const r1 = 26;
-        const r2 = 80;
+      {/* Outer square */}
+      <rect x="6" y="6" width="188" height="188" opacity=".25" />
+      {/* Outer circle */}
+      <circle cx="100" cy="100" r="92" opacity=".35" />
+      <circle cx="100" cy="100" r="78" opacity=".25" />
+
+      {/* 16 petal-ring (octagon split) */}
+      {[...Array(16)].map((_, i) => {
+        const a = (i / 16) * Math.PI * 2;
+        const r1 = 62;
+        const r2 = 78;
         return (
           <line
-            key={i}
+            key={`r-${i}`}
             x1={100 + Math.cos(a) * r1}
             y1={100 + Math.sin(a) * r1}
             x2={100 + Math.cos(a) * r2}
@@ -35,75 +36,82 @@ export function Mandala({ className, ...rest }: SvgProps) {
           />
         );
       })}
-      {[...Array(12)].map((_, i) => {
-        const a = (i / 12) * Math.PI * 2;
-        const x = 100 + Math.cos(a) * 62;
-        const y = 100 + Math.sin(a) * 62;
-        return <circle key={`p-${i}`} cx={x} cy={y} r="2.5" fill="currentColor" stroke="none" opacity=".7" />;
+
+      {/* Inner circle */}
+      <circle cx="100" cy="100" r="62" opacity=".55" />
+
+      {/* 9 interlocking triangles — 4 upward, 5 downward, the heart of Sri Yantra */}
+      {/* upward */}
+      <polygon points="100,40 144,108 56,108" opacity=".7" />
+      <polygon points="100,55 130,98 70,98" opacity=".8" />
+      <polygon points="100,68 122,95 78,95" opacity=".75" />
+      <polygon points="100,76 116,92 84,92" opacity=".6" />
+      {/* downward */}
+      <polygon points="100,160 56,92 144,92" opacity=".7" />
+      <polygon points="100,145 70,102 130,102" opacity=".8" />
+      <polygon points="100,132 78,105 122,105" opacity=".75" />
+      <polygon points="100,124 84,108 116,108" opacity=".6" />
+      <polygon points="100,116 90,110 110,110" opacity=".5" />
+
+      {/* Central bindu */}
+      <circle cx="100" cy="100" r="2.5" fill="currentColor" stroke="none" opacity="1" />
+    </svg>
+  );
+}
+
+/* ---------- Chakra wheel — 8-spoke holographic disc ---------- */
+export function ChakraWheel({ className, ...rest }: SvgProps) {
+  return (
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="0.8" aria-hidden className={className} {...rest}>
+      <circle cx="100" cy="100" r="96" opacity=".25" />
+      <circle cx="100" cy="100" r="82" opacity=".4" />
+      <circle cx="100" cy="100" r="64" opacity=".55" />
+      <circle cx="100" cy="100" r="28" opacity=".75" />
+      <circle cx="100" cy="100" r="3" fill="currentColor" stroke="none" />
+      {[...Array(24)].map((_, i) => {
+        const a = (i / 24) * Math.PI * 2;
+        return (
+          <line
+            key={i}
+            x1={100 + Math.cos(a) * 28}
+            y1={100 + Math.sin(a) * 28}
+            x2={100 + Math.cos(a) * 96}
+            y2={100 + Math.sin(a) * 96}
+            opacity={i % 3 === 0 ? 0.6 : 0.25}
+            strokeWidth={i % 3 === 0 ? 1 : 0.5}
+          />
+        );
       })}
       {[...Array(8)].map((_, i) => {
         const a = (i / 8) * Math.PI * 2;
-        const x1 = 100 + Math.cos(a) * 44;
-        const y1 = 100 + Math.sin(a) * 44;
-        const x2 = 100 + Math.cos(a) * 98;
-        const y2 = 100 + Math.sin(a) * 98;
-        return <line key={`s-${i}`} x1={x1} y1={y1} x2={x2} y2={y2} opacity=".15" />;
+        const x = 100 + Math.cos(a) * 64;
+        const y = 100 + Math.sin(a) * 64;
+        return <circle key={`d-${i}`} cx={x} cy={y} r="2" fill="currentColor" stroke="none" opacity=".8" />;
       })}
     </svg>
   );
 }
 
-/* ---------- Paisley — a single decorative paisley shape ---------- */
-export function Paisley({ className, ...rest }: SvgProps) {
+/* ---------- Circuit Jaali — geometric mughal lattice with circuit-board feel ---------- */
+export function CircuitJaali({ className, ...rest }: SvgProps) {
   return (
-    <svg
-      viewBox="0 0 120 160"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1"
-      aria-hidden
-      className={className}
-      {...rest}
-    >
-      <path
-        d="M60 12 C 40 12, 18 38, 18 78 C 18 118, 42 148, 70 148 C 96 148, 110 130, 110 108 C 110 90, 96 80, 80 80 C 66 80, 56 90, 56 102 C 56 112, 64 120, 74 120"
-        opacity=".75"
-      />
-      <path
-        d="M60 24 C 44 24, 28 46, 28 78 C 28 110, 48 138, 70 138 C 90 138, 100 124, 100 108 C 100 94, 90 86, 80 86"
-        opacity=".5"
-      />
-      <circle cx="74" cy="120" r="2" fill="currentColor" stroke="none" opacity=".7" />
-      <circle cx="44" cy="60" r="1.5" fill="currentColor" stroke="none" opacity=".5" />
-      <circle cx="52" cy="42" r="1" fill="currentColor" stroke="none" opacity=".4" />
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.6" aria-hidden className={className} {...rest}>
+      <polygon points="50,4 96,28 96,72 50,96 4,72 4,28" opacity=".7" />
+      <polygon points="50,16 84,32 84,68 50,84 16,68 16,32" opacity=".5" />
+      <polygon points="50,28 72,38 72,62 50,72 28,62 28,38" opacity=".4" />
+      <circle cx="50" cy="50" r="3" fill="currentColor" stroke="none" opacity=".9" />
+      <circle cx="50" cy="4" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="96" cy="50" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="50" cy="96" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="4" cy="50" r="1.5" fill="currentColor" stroke="none" />
+      <line x1="50" y1="4" x2="50" y2="96" opacity=".2" />
+      <line x1="4" y1="28" x2="96" y2="72" opacity=".2" />
+      <line x1="96" y1="28" x2="4" y2="72" opacity=".2" />
     </svg>
   );
 }
 
-/* ---------- Jaali — a tile-able geometric lattice (Mughal screen) ---------- */
-export function JaaliTile({ className, ...rest }: SvgProps) {
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="0.8"
-      aria-hidden
-      className={className}
-      {...rest}
-    >
-      <polygon points="50,2 98,26 98,74 50,98 2,74 2,26" opacity=".7" />
-      <polygon points="50,18 84,34 84,66 50,82 16,66 16,34" opacity=".55" />
-      <polygon points="50,34 70,42 70,58 50,66 30,58 30,42" opacity=".4" />
-      <circle cx="50" cy="50" r="3" fill="currentColor" stroke="none" opacity=".7" />
-      <line x1="50" y1="2" x2="50" y2="98" opacity=".25" />
-      <line x1="2" y1="26" x2="98" y2="74" opacity=".25" />
-      <line x1="98" y1="26" x2="2" y2="74" opacity=".25" />
-    </svg>
-  );
-}
-
-/* ---------- Om — ॐ as a graphic (uses Tiro Devanagari) ---------- */
+/* ---------- OM glyph ---------- */
 export function OmGlyph({ className }: { className?: string }) {
   return (
     <span aria-hidden className={`devanagari leading-none ${className ?? ""}`} style={{ fontWeight: 400 }}>
@@ -112,34 +120,14 @@ export function OmGlyph({ className }: { className?: string }) {
   );
 }
 
-/* ---------- Decorative star/sun for kickers ---------- */
-export function StarBurst({ className, ...rest }: SvgProps) {
+/* ---------- Corner bracket — like targeting reticle ---------- */
+export function CornerBracket({ className, ...rest }: SvgProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className} {...rest}>
-      <path d="M12 1l1.5 6 5.5-2-2 5.5 6 1.5-6 1.5 2 5.5-5.5-2L12 23l-1.5-6-5.5 2 2-5.5L1 12l6-1.5-2-5.5 5.5 2L12 1z" />
-    </svg>
-  );
-}
-
-/* ---------- Lotus petal accent (small) ---------- */
-export function LotusAccent({ className, ...rest }: SvgProps) {
-  return (
-    <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden className={className} {...rest}>
-      {[...Array(8)].map((_, i) => {
-        const a = (i / 8) * 360;
-        return (
-          <ellipse
-            key={i}
-            cx="40"
-            cy="20"
-            rx="6"
-            ry="18"
-            opacity=".7"
-            transform={`rotate(${a} 40 40)`}
-          />
-        );
-      })}
-      <circle cx="40" cy="40" r="3" fill="currentColor" stroke="none" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden className={className} {...rest}>
+      <path d="M2 8 V2 H8" />
+      <path d="M22 8 V2 H16" />
+      <path d="M2 16 V22 H8" />
+      <path d="M22 16 V22 H16" />
     </svg>
   );
 }

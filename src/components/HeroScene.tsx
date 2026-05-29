@@ -1,184 +1,144 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshTransmissionMaterial, OrbitControls, Sparkles } from "@react-three/drei";
+import { Float, Line, OrbitControls, Points, PointMaterial } from "@react-three/drei";
 import { Suspense, useMemo, useRef } from "react";
 import * as THREE from "three";
 
-const SAFFRON = "#ff8a3d";
+const SAFFRON = "#ff7a26";
+const SAFFRON_HOT = "#ff8a3d";
+const CYAN = "#22d3ee";
+const MAGENTA = "#ec4899";
 const GOLD = "#d4af37";
-const DEEP_GOLD = "#b8932a";
-const INDIGO = "#4f3fc3";
-const CREAM = "#fde9c3";
 
-/* Glass core — a dodecahedron with transmission material */
-function GlassCore() {
-  const ref = useRef<THREE.Mesh>(null!);
+/* Module-level triangle definitions — never re-created */
+const T = (pts: [number, number][], z: number, color: string) => {
+  const points: [number, number, number][] = pts.map(([x, y]) => [x, y, z]);
+  points.push(points[0]); // close the loop
+  return { points, color };
+};
+
+const TRIANGLES = [
+  // upward (Shiva) — saffron / gold
+  T([[0, 1.8], [1.6, -0.6], [-1.6, -0.6]], 0, SAFFRON),
+  T([[0, 1.5], [1.3, -0.45], [-1.3, -0.45]], 0.02, SAFFRON_HOT),
+  T([[0, 1.2], [1.05, -0.35], [-1.05, -0.35]], 0.04, GOLD),
+  T([[0, 0.95], [0.85, -0.28], [-0.85, -0.28]], 0.06, GOLD),
+  // downward (Shakti) — cyan / magenta
+  T([[0, -1.8], [1.6, 0.6], [-1.6, 0.6]], 0.08, CYAN),
+  T([[0, -1.5], [1.3, 0.45], [-1.3, 0.45]], 0.1, CYAN),
+  T([[0, -1.2], [1.05, 0.35], [-1.05, 0.35]], 0.12, MAGENTA),
+  T([[0, -0.95], [0.85, 0.28], [-0.85, 0.28]], 0.14, MAGENTA),
+  T([[0, -0.7], [0.6, 0.2], [-0.6, 0.2]], 0.16, CYAN),
+];
+
+/* Sri Yantra — 9 interlocking triangles */
+function SriYantra3D() {
+  const ref = useRef<THREE.Group>(null!);
   useFrame((_, dt) => {
-    if (ref.current) {
-      ref.current.rotation.x += dt * 0.18;
-      ref.current.rotation.y += dt * 0.24;
-    }
-  });
-  return (
-    <mesh ref={ref} scale={0.95}>
-      <icosahedronGeometry args={[1, 0]} />
-      <MeshTransmissionMaterial
-        backside
-        backsideThickness={1}
-        thickness={0.4}
-        transmission={1}
-        roughness={0.05}
-        chromaticAberration={0.04}
-        anisotropy={0.6}
-        ior={1.5}
-        color={CREAM}
-        attenuationColor={SAFFRON}
-        attenuationDistance={0.6}
-        clearcoat={1}
-        clearcoatRoughness={0.05}
-      />
-    </mesh>
-  );
-}
-
-/* A ring of dots (chakra-style) */
-function ChakraRing({
-  radius = 2,
-  count = 24,
-  thickness = 0.04,
-  color = GOLD,
-  emissive = 0.6,
-  speed = 0.2,
-  axis = [0, 0, 1] as [number, number, number],
-  tilt = 0,
-}: {
-  radius?: number;
-  count?: number;
-  thickness?: number;
-  color?: string;
-  emissive?: number;
-  speed?: number;
-  axis?: [number, number, number];
-  tilt?: number;
-}) {
-  const groupRef = useRef<THREE.Group>(null!);
-  const dummy = useMemo(() => new THREE.Object3D(), []);
-  const meshRef = useRef<THREE.InstancedMesh>(null!);
-
-  useMemo(() => {
-    // initial positions
-    for (let i = 0; i < count; i++) {
-      const a = (i / count) * Math.PI * 2;
-      dummy.position.set(Math.cos(a) * radius, Math.sin(a) * radius, 0);
-      const s = 0.9 + (i % 3) * 0.25;
-      dummy.scale.setScalar(s);
-      dummy.updateMatrix();
-      meshRef.current?.setMatrixAt(i, dummy.matrix);
-    }
-    if (meshRef.current) meshRef.current.instanceMatrix.needsUpdate = true;
-  }, [count, radius, dummy]);
-
-  useFrame((_, dt) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.x += axis[0] * speed * dt;
-      groupRef.current.rotation.y += axis[1] * speed * dt;
-      groupRef.current.rotation.z += axis[2] * speed * dt;
-    }
+    if (ref.current) ref.current.rotation.z += dt * 0.05;
   });
 
   return (
-    <group ref={groupRef} rotation={[tilt, 0, 0]}>
-      <instancedMesh ref={meshRef} args={[undefined as unknown as THREE.BufferGeometry, undefined as unknown as THREE.Material, count]}>
-        <sphereGeometry args={[thickness, 10, 10]} />
-        <meshStandardMaterial
-          color={color}
-          emissive={color}
-          emissiveIntensity={emissive}
-          metalness={0.6}
-          roughness={0.25}
-        />
-      </instancedMesh>
+    <group ref={ref}>
+      {TRIANGLES.map((t, i) => (
+        <Line key={i} points={t.points} color={t.color} lineWidth={2} transparent opacity={0.9} />
+      ))}
+
+      {/* Outer rings */}
+      <mesh>
+        <torusGeometry args={[2.6, 0.012, 16, 200]} />
+        <meshStandardMaterial color={SAFFRON} emissive={SAFFRON} emissiveIntensity={1.4} metalness={0.6} roughness={0.3} />
+      </mesh>
+      <mesh>
+        <torusGeometry args={[2.8, 0.008, 16, 220]} />
+        <meshStandardMaterial color={CYAN} emissive={CYAN} emissiveIntensity={1.1} metalness={0.6} roughness={0.3} />
+      </mesh>
+      {/* Bindu */}
+      <mesh>
+        <sphereGeometry args={[0.07, 16, 16]} />
+        <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={3} />
+      </mesh>
     </group>
   );
 }
 
-/* Thin torus ring — outer mandala edge */
-function MandalaRing({
-  radius = 2.7,
-  tube = 0.012,
+/* Petal ring — small spheres around the yantra */
+function LotusDots({
+  radius = 3.0,
+  count = 16,
   color = GOLD,
-  emissive = 0.4,
-  speed = 0.06,
-  tilt = 0,
+  direction = -1,
 }: {
   radius?: number;
-  tube?: number;
-  color?: string;
-  emissive?: number;
-  speed?: number;
-  tilt?: number;
-}) {
-  const ref = useRef<THREE.Mesh>(null!);
-  useFrame((_, dt) => {
-    if (ref.current) ref.current.rotation.z += speed * dt;
-  });
-  return (
-    <mesh ref={ref} rotation={[tilt, 0, 0]}>
-      <torusGeometry args={[radius, tube, 32, 220]} />
-      <meshStandardMaterial
-        color={color}
-        emissive={color}
-        emissiveIntensity={emissive}
-        metalness={0.7}
-        roughness={0.25}
-      />
-    </mesh>
-  );
-}
-
-/* 12 thin lotus petals — slim, refined, layered behind the core */
-function LotusPetals({
-  count = 12,
-  radius = 1.5,
-  length = 0.42,
-  width = 0.05,
-  color = SAFFRON,
-  speed = 0.04,
-  z = -0.2,
-}: {
   count?: number;
-  radius?: number;
-  length?: number;
-  width?: number;
   color?: string;
-  speed?: number;
-  z?: number;
+  direction?: number;
 }) {
   const ref = useRef<THREE.Group>(null!);
   useFrame((_, dt) => {
-    if (ref.current) ref.current.rotation.z += dt * speed;
+    if (ref.current) ref.current.rotation.z += dt * 0.07 * direction;
+  });
+  const positions = useMemo(() => {
+    const arr: [number, number, number][] = [];
+    for (let i = 0; i < count; i++) {
+      const a = (i / count) * Math.PI * 2;
+      arr.push([Math.cos(a) * radius, Math.sin(a) * radius, 0.18]);
+    }
+    return arr;
+  }, [radius, count]);
+
+  return (
+    <group ref={ref}>
+      {positions.map((p, i) => (
+        <mesh key={i} position={p}>
+          <sphereGeometry args={[0.035, 10, 10]} />
+          <meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.8} metalness={0.6} roughness={0.3} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+/* Outer wireframe icosahedron */
+function OuterIcosa() {
+  const ref = useRef<THREE.Mesh>(null!);
+  useFrame((_, dt) => {
+    if (ref.current) {
+      ref.current.rotation.x += dt * 0.12;
+      ref.current.rotation.y += dt * 0.08;
+    }
   });
   return (
-    <group ref={ref} position={[0, 0, z]}>
-      {Array.from({ length: count }).map((_, i) => {
-        const a = (i / count) * Math.PI * 2;
-        const x = Math.cos(a) * radius;
-        const y = Math.sin(a) * radius;
-        return (
-          <mesh key={i} position={[x, y, 0]} rotation={[0, 0, a - Math.PI / 2]}>
-            <boxGeometry args={[width, length, width]} />
-            <meshStandardMaterial
-              color={color}
-              emissive={color}
-              emissiveIntensity={0.65}
-              metalness={0.6}
-              roughness={0.3}
-              transparent
-              opacity={0.6}
-            />
-          </mesh>
-        );
-      })}
-    </group>
+    <mesh ref={ref} scale={3.4}>
+      <icosahedronGeometry args={[1, 1]} />
+      <meshBasicMaterial color={CYAN} wireframe transparent opacity={0.18} />
+    </mesh>
+  );
+}
+
+/* Star field */
+function StarField() {
+  const positions = useMemo(() => {
+    const arr = new Float32Array(800 * 3);
+    for (let i = 0; i < 800; i++) {
+      const r = 4 + Math.random() * 5;
+      const a = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      arr[i * 3] = r * Math.sin(phi) * Math.cos(a);
+      arr[i * 3 + 1] = r * Math.sin(phi) * Math.sin(a);
+      arr[i * 3 + 2] = r * Math.cos(phi);
+    }
+    return arr;
+  }, []);
+
+  const ref = useRef<THREE.Points>(null!);
+  useFrame((_, dt) => {
+    if (ref.current) ref.current.rotation.y += dt * 0.015;
+  });
+
+  return (
+    <Points ref={ref} positions={positions} stride={3}>
+      <PointMaterial size={0.028} color={GOLD} transparent opacity={0.7} sizeAttenuation depthWrite={false} />
+    </Points>
   );
 }
 
@@ -186,43 +146,30 @@ export function HeroScene() {
   return (
     <Canvas
       dpr={[1, 1.8]}
-      camera={{ position: [0, 0, 6.8], fov: 42 }}
+      camera={{ position: [0, 0, 6.4], fov: 42 }}
       style={{ position: "absolute", inset: 0 }}
       gl={{ antialias: true, alpha: true }}
     >
       <Suspense fallback={null}>
-        <ambientLight intensity={0.45} />
-        <pointLight position={[6, 6, 6]} intensity={0.9} color={SAFFRON} />
-        <pointLight position={[-6, -3, 3]} intensity={0.6} color={INDIGO} />
-        <pointLight position={[0, 0, 5]} intensity={0.5} color={GOLD} />
-        <directionalLight position={[2, 6, 4]} intensity={0.5} color={CREAM} />
+        <ambientLight intensity={0.6} />
+        <pointLight position={[6, 6, 6]} intensity={1.5} color={SAFFRON} />
+        <pointLight position={[-6, -3, 4]} intensity={1.2} color={CYAN} />
+        <pointLight position={[0, 4, 5]} intensity={0.8} color={MAGENTA} />
 
-        <Float speed={1.2} rotationIntensity={0.4} floatIntensity={0.6}>
-          <GlassCore />
+        <Float speed={1.1} rotationIntensity={0.25} floatIntensity={0.45}>
+          <SriYantra3D />
+          <LotusDots radius={3.05} count={16} color={GOLD} direction={-1} />
+          <LotusDots radius={3.32} count={24} color={SAFFRON} direction={1} />
         </Float>
 
-        {/* 3 layered rings of lotus petals around the core */}
-        <LotusPetals count={8} radius={1.55} length={0.36} width={0.045} color={SAFFRON} speed={0.05} />
-        <LotusPetals count={12} radius={1.95} length={0.32} width={0.04} color={GOLD} speed={-0.04} z={-0.05} />
-        <LotusPetals count={16} radius={2.35} length={0.28} width={0.035} color={DEEP_GOLD} speed={0.03} z={-0.1} />
-
-        <Float speed={0.9} rotationIntensity={0.25} floatIntensity={0.4}>
-          {/* concentric mandala rings — gold filaments */}
-          <ChakraRing radius={2.7} count={32} thickness={0.038} color={GOLD} speed={0.1} axis={[0, 0, 1]} />
-          <ChakraRing radius={3.15} count={48} thickness={0.028} color={DEEP_GOLD} speed={-0.07} axis={[0, 0, 1]} tilt={0.2} />
-          <ChakraRing radius={3.6} count={64} thickness={0.02} color={SAFFRON} speed={0.045} axis={[0.15, 0.15, 1]} tilt={-0.18} />
-          <MandalaRing radius={4.05} tube={0.01} color={GOLD} emissive={0.6} speed={0.04} tilt={0.4} />
-          <MandalaRing radius={4.35} tube={0.007} color={SAFFRON} emissive={0.5} speed={-0.03} tilt={-0.4} />
-        </Float>
-
-        <Sparkles count={140} scale={9} size={2} speed={0.25} color={GOLD} opacity={0.7} />
-        <Sparkles count={60} scale={7} size={3} speed={0.18} color={CREAM} opacity={0.4} />
+        <OuterIcosa />
+        <StarField />
 
         <OrbitControls
           enableZoom={false}
           enablePan={false}
           autoRotate
-          autoRotateSpeed={0.45}
+          autoRotateSpeed={0.5}
           enableDamping
           dampingFactor={0.06}
         />

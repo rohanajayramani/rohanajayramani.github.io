@@ -13,7 +13,7 @@ import {
 import { useState } from "react";
 import { profile } from "../data/profile";
 import { SectionHead } from "./SectionHead";
-import { Mandala, OmGlyph } from "./decor/Motifs";
+import { SriYantra, OmGlyph } from "./decor/Motifs";
 
 export function Contact() {
   const [sending, setSending] = useState(false);
@@ -22,9 +22,9 @@ export function Contact() {
     <section id="contact" className="section-pad container-page">
       <SectionHead
         num="07"
-        kicker="Connect"
+        kicker="SIGNAL · CONTACT"
         title="Let's build"
-        titleItalic="something"
+        titleEmphasis="Something"
         subtitle="An idea, a role, or a hello — my inbox is open."
       />
 
@@ -35,22 +35,24 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55 }}
-          className="glass relative overflow-hidden rounded-[26px] p-8"
+          className="surface relative overflow-hidden rounded-lg p-8"
         >
-          <Mandala className="absolute -right-12 -top-12 h-48 w-48 text-gold-400 opacity-[0.08] animate-spin-slow" />
-          <OmGlyph className="absolute right-6 bottom-5 text-5xl text-gold-400/15" />
+          <SriYantra className="absolute -right-14 -top-14 h-52 w-52 text-saffron-400 opacity-[0.08] animate-spin-slow" />
+          <OmGlyph className="absolute right-6 bottom-5 text-5xl text-saffron-400/12" />
 
-          <h3 className="heading-display relative text-[22px] font-medium">Reach me directly</h3>
+          <h3 className="relative font-display text-[20px] font-bold uppercase tracking-tight">
+            Reach me directly
+          </h3>
           <div className="relative mt-5 space-y-1">
             <a
               href={profile.socials.email}
-              className="group flex items-center gap-3 border-b border-dashed border-gold-400/15 py-3 text-[14px] transition hover:text-gold-400"
+              className="group flex items-center gap-3 border-b border-dashed border-white/10 py-3 text-[14px] transition hover:text-cyan-400"
             >
-              <span className="grid h-10 w-10 place-items-center rounded-xl border border-gold-400/25 bg-gold-400/10 text-gold-400">
+              <span className="grid h-10 w-10 place-items-center rounded-md border border-saffron-400/30 bg-saffron-400/10 text-saffron-400">
                 <Mail className="size-4" />
               </span>
               <span className="flex flex-col">
-                <small className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                <small className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                   Email
                 </small>
                 <span>{profile.emailAddress}</span>
@@ -59,24 +61,24 @@ export function Contact() {
             </a>
             <a
               href={profile.socials.phone}
-              className="group flex items-center gap-3 border-b border-dashed border-gold-400/15 py-3 text-[14px] transition hover:text-gold-400"
+              className="group flex items-center gap-3 border-b border-dashed border-white/10 py-3 text-[14px] transition hover:text-cyan-400"
             >
-              <span className="grid h-10 w-10 place-items-center rounded-xl border border-gold-400/25 bg-gold-400/10 text-gold-400">
+              <span className="grid h-10 w-10 place-items-center rounded-md border border-saffron-400/30 bg-saffron-400/10 text-saffron-400">
                 <Phone className="size-4" />
               </span>
               <span className="flex flex-col">
-                <small className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                <small className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                   Phone
                 </small>
                 <span>{profile.phoneNumber}</span>
               </span>
             </a>
-            <div className="group flex items-center gap-3 py-3 text-[14px]">
-              <span className="grid h-10 w-10 place-items-center rounded-xl border border-gold-400/25 bg-gold-400/10 text-gold-400">
+            <div className="flex items-center gap-3 py-3 text-[14px]">
+              <span className="grid h-10 w-10 place-items-center rounded-md border border-saffron-400/30 bg-saffron-400/10 text-saffron-400">
                 <MapPin className="size-4" />
               </span>
               <span className="flex flex-col">
-                <small className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                <small className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                   Location
                 </small>
                 <span>{profile.location}</span>
@@ -96,7 +98,7 @@ export function Contact() {
                 href={href}
                 target="_blank"
                 rel="noopener"
-                className="grid h-10 w-10 place-items-center rounded-full border border-gold-400/25 bg-white/[0.025] text-muted-foreground transition hover:-translate-y-0.5 hover:border-gold-400 hover:text-gold-400"
+                className="grid h-10 w-10 place-items-center rounded-md border border-white/15 bg-white/[0.025] text-muted-foreground transition hover:-translate-y-0.5 hover:border-cyan-400 hover:text-cyan-400"
               >
                 <Icon className="size-4" />
               </a>
@@ -113,7 +115,7 @@ export function Contact() {
           action="https://formsubmit.co/rohanajayramani@gmail.com"
           method="POST"
           onSubmit={() => setSending(true)}
-          className="glass grid gap-4 rounded-[26px] p-8"
+          className="surface grid gap-4 rounded-lg p-8"
         >
           <input type="hidden" name="_subject" value="New message from your portfolio" />
           <input type="hidden" name="_template" value="table" />
@@ -137,8 +139,8 @@ export function Contact() {
             textarea
             required
           />
-          <button disabled={sending} type="submit" className="btn-saffron mt-1 justify-center">
-            {sending ? "Sending…" : "Send message"}
+          <button disabled={sending} type="submit" className="btn-primary mt-1 justify-center">
+            {sending ? "Sending…" : "Send Signal"}
             <Send className="size-4 transition group-hover:translate-x-0.5" />
           </button>
         </motion.form>
@@ -170,7 +172,7 @@ function Field({ id, label, name, type = "text", placeholder, required, textarea
           placeholder={placeholder}
           required={required}
           rows={5}
-          className="w-full rounded-2xl border border-gold-400/25 bg-background/40 px-4 py-3 text-[14px] outline-none ring-saffron-400/30 transition placeholder:text-muted-foreground focus:border-saffron-400 focus:ring-4"
+          className="w-full rounded-md border border-white/15 bg-background/40 px-4 py-3 text-[14px] outline-none ring-saffron-400/30 transition placeholder:text-muted-foreground focus:border-saffron-400 focus:ring-4"
         />
       ) : (
         <input
@@ -179,7 +181,7 @@ function Field({ id, label, name, type = "text", placeholder, required, textarea
           type={type}
           placeholder={placeholder}
           required={required}
-          className="w-full rounded-2xl border border-gold-400/25 bg-background/40 px-4 py-3 text-[14px] outline-none ring-saffron-400/30 transition placeholder:text-muted-foreground focus:border-saffron-400 focus:ring-4"
+          className="w-full rounded-md border border-white/15 bg-background/40 px-4 py-3 text-[14px] outline-none ring-saffron-400/30 transition placeholder:text-muted-foreground focus:border-saffron-400 focus:ring-4"
         />
       )}
     </div>

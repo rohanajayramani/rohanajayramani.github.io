@@ -3,12 +3,12 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { cn } from "../lib/utils";
 
 const navItems = [
-  { num: "01", href: "#home", label: "Home" },
-  { num: "02", href: "#about", label: "About" },
-  { num: "03", href: "#experience", label: "Story" },
-  { num: "04", href: "#work", label: "Work" },
-  { num: "05", href: "#education", label: "Learning" },
-  { num: "06", href: "#contact", label: "Connect" },
+  { num: "00", href: "#home", label: "Home" },
+  { num: "01", href: "#about", label: "Index" },
+  { num: "02", href: "#experience", label: "Trail" },
+  { num: "03", href: "#work", label: "Work" },
+  { num: "04", href: "#education", label: "Roots" },
+  { num: "05", href: "#contact", label: "Signal" },
 ];
 
 export function Header() {
@@ -48,37 +48,37 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 py-3 transition-colors md:px-8",
+          "fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 py-3 transition-colors md:px-6",
           "backdrop-blur-xl",
           scrolled
-            ? "border-b border-gold-400/15 bg-background/60"
+            ? "border-b border-white/10 bg-background/70"
             : "border-b border-transparent bg-transparent",
         )}
       >
-        <a href="#home" className="flex items-center gap-3 font-display font-medium tracking-tight">
+        <a href="#home" className="group flex items-center gap-3 font-display font-semibold tracking-tight">
           <span
-            className="grid h-9 w-9 place-items-center rounded-full text-[15px] font-medium"
+            className="grid h-9 w-9 place-items-center rounded-md text-[14px] font-bold"
             style={{
-              background: "linear-gradient(135deg, #ff9d4d 0%, #d4af37 100%)",
-              color: "#0b0710",
-              boxShadow: "0 8px 24px -8px rgb(255 138 61 / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.3)",
+              background: "linear-gradient(135deg, #ff8a3d 0%, #ec4899 70%, #22d3ee 130%)",
+              color: "#06060f",
+              boxShadow: "0 6px 22px -6px rgb(255 122 38 / 0.6)",
             }}
           >
-            <span className="devanagari -translate-y-px text-[18px]">र</span>
+            <span className="devanagari -translate-y-px text-[16px]">र</span>
           </span>
-          <span className="text-base text-foreground">
-            Rohan<span className="text-gold-400">.</span>
+          <span className="font-mono text-[12px] font-semibold uppercase tracking-[0.22em] text-foreground">
+            Rohan A. Ramani
           </span>
         </a>
 
-        <nav className="hidden items-center gap-1 rounded-full border border-gold-400/20 bg-white/[0.025] p-1 backdrop-blur-xl lg:flex">
+        <nav className="hidden items-center gap-0.5 rounded-md border border-white/10 bg-white/[0.02] p-1 backdrop-blur-xl lg:flex">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="group relative inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="group relative inline-flex items-center gap-2 rounded-sm px-3 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:bg-white/[0.04] hover:text-foreground"
             >
-              <span className="font-mono text-[9px] text-gold-400/70">{item.num}</span>
+              <span className="text-[9px] text-saffron-400/80">{item.num}</span>
               {item.label}
             </a>
           ))}
@@ -88,7 +88,7 @@ export function Header() {
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="grid h-9 w-9 place-items-center rounded-full border border-gold-400/25 bg-white/[0.025] text-muted-foreground transition hover:rotate-[-15deg] hover:text-saffron-400"
+            className="grid h-9 w-9 place-items-center rounded-md border border-white/10 bg-white/[0.025] text-muted-foreground transition hover:rotate-[-15deg] hover:border-saffron-400 hover:text-saffron-400"
           >
             {theme === "dark" ? <Moon className="size-4" /> : <Sun className="size-4" />}
           </button>
@@ -96,15 +96,14 @@ export function Header() {
             href="https://www.linkedin.com/in/rohanajayramani/"
             target="_blank"
             rel="noopener"
-            className="hidden h-9 items-center gap-1.5 rounded-full border border-gold-400/30 bg-white/[0.02] px-4 text-[13px] font-semibold transition hover:border-gold-400 hover:text-gold-400 md:inline-flex"
+            className="hidden h-9 items-center gap-1.5 rounded-md border border-white/15 bg-white/[0.02] px-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] transition hover:border-cyan-400 hover:text-cyan-400 md:inline-flex"
           >
             Connect
-            <span className="inline-block">→</span>
           </a>
           <button
             onClick={() => setOpen((o) => !o)}
             aria-label="Toggle menu"
-            className="grid h-9 w-9 place-items-center rounded-xl border border-gold-400/25 bg-white/[0.025] lg:hidden"
+            className="grid h-9 w-9 place-items-center rounded-md border border-white/10 bg-white/[0.025] lg:hidden"
           >
             {open ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
@@ -114,7 +113,7 @@ export function Header() {
       {/* Mobile menu */}
       <div
         className={cn(
-          "fixed inset-x-3 top-16 z-40 origin-top rounded-2xl border border-gold-400/20 bg-background/95 p-3 backdrop-blur-xl transition lg:hidden",
+          "fixed inset-x-3 top-16 z-40 origin-top rounded-md border border-white/10 bg-background/95 p-3 backdrop-blur-xl transition lg:hidden",
           open ? "scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0",
         )}
       >
@@ -124,9 +123,9 @@ export function Header() {
               <a
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition hover:bg-white/[0.04] hover:text-foreground"
+                className="flex items-center gap-3 rounded-md px-3 py-2.5 font-mono text-[12px] uppercase tracking-[0.16em] text-muted-foreground transition hover:bg-white/[0.04] hover:text-foreground"
               >
-                <span className="font-mono text-[10px] text-gold-400/70">{item.num}</span>
+                <span className="text-[10px] text-saffron-400/80">{item.num}</span>
                 {item.label}
               </a>
             </li>

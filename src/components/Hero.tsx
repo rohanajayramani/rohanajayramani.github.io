@@ -1,97 +1,94 @@
-import { ArrowRight, ArrowUpRight, ChevronDown, Github, Linkedin, Mail } from "lucide-react";
-import { Suspense, lazy, useEffect, useState } from "react";
+import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
+import { Suspense, lazy } from "react";
 import { profile } from "../data/profile";
-import { OmGlyph } from "./decor/Motifs";
+import { OmGlyph, CornerBracket } from "./decor/Motifs";
 
 const HeroScene = lazy(() => import("./HeroScene").then((m) => ({ default: m.HeroScene })));
 
 export function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  useEffect(() => {
-    const t = setInterval(
-      () => setRoleIndex((i) => (i + 1) % profile.rotatingRoles.length),
-      2400,
-    );
-    return () => clearInterval(t);
-  }, []);
-
   return (
     <section
       id="home"
-      className="relative isolate min-h-[100svh] overflow-hidden pt-28 md:pt-36"
+      className="relative isolate min-h-[100svh] overflow-hidden pt-24 md:pt-28"
     >
-      {/* 3D scene — full background, fades in from center-right */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[60%] md:block">
+      {/* Full-bleed 3D backdrop */}
+      <div className="pointer-events-none absolute inset-0 z-0 hidden md:block">
         <Suspense fallback={null}>
           <HeroScene />
         </Suspense>
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-background/30 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/85" />
+        {/* dark vignette so foreground text reads */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/55 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30" />
       </div>
 
-      {/* Mobile scene on top */}
-      <div className="pointer-events-none relative mx-auto block h-[300px] w-full md:hidden">
+      {/* Mobile 3D — smaller, on top */}
+      <div className="pointer-events-none relative block h-[300px] w-full md:hidden">
         <Suspense fallback={null}>
           <HeroScene />
         </Suspense>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background" />
       </div>
 
-      {/* Foreground content */}
-      <div className="container-page relative z-20 grid grid-cols-1 items-center gap-12 pb-24 md:grid-cols-[1.1fr_0.9fr] md:pb-32">
-        <div>
-          {/* Devanagari eyebrow */}
-          <div className="hero-in mb-7 flex items-center gap-3" style={{ animationDelay: "0ms" }}>
-            <span className="devanagari text-2xl text-gold-400" aria-hidden>
-              नमस्ते
+      {/* Foreground — cinematic left-aligned */}
+      <div className="container-page relative z-10 grid grid-cols-1 gap-8 pb-24 pt-10 md:grid-cols-12 md:gap-6 md:pb-32 md:pt-16">
+        <div className="md:col-span-7">
+          {/* TOP CODED BAR */}
+          <div
+            className="hero-in mb-8 flex flex-wrap items-center gap-3 text-muted-foreground"
+            style={{ animationDelay: "0ms" }}
+          >
+            <span className="label-pill text-saffron-400" style={{ borderColor: "rgb(255 122 38 / 0.3)" }}>
+              <span className="relative grid h-1.5 w-1.5 place-items-center">
+                <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/60" />
+                <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              </span>
+              Status · Available
             </span>
-            <span className="h-px w-10 bg-gradient-to-r from-gold-400/60 to-transparent" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              Namaste — welcome
+            <span className="label-pill">
+              19.0760°N · 72.8777°E
+            </span>
+            <span className="label-pill">
+              Mumbai · IST
             </span>
           </div>
 
-          <h1
-            className="heading-display hero-in text-balance text-[clamp(2.6rem,7vw,5.2rem)] leading-[0.96]"
-            style={{ animationDelay: "80ms", fontVariationSettings: "'opsz' 144" }}
-          >
-            <span className="text-foreground">I'm </span>
-            <span className="text-grad italic">Rohan&nbsp;Ajay</span>
-            <br />
-            <span className="text-foreground">Ramani</span>
-            <span className="text-grad-warm">.</span>
-          </h1>
-
+          {/* DEVANAGARI WHISPER */}
           <p
-            className="hero-in mt-7 max-w-[560px] font-sans text-balance text-[18px] leading-[1.55] text-muted-foreground"
-            style={{ animationDelay: "200ms" }}
+            className="devanagari hero-in mb-3 text-[18px] text-saffron-400/80"
+            style={{ animationDelay: "80ms" }}
           >
-            <span className="relative inline-block min-w-[9ch] align-baseline">
-              <span
-                key={roleIndex}
-                className="absolute inset-0 text-grad font-semibold italic font-display animate-fade-up"
-                style={{ fontStyle: "italic" }}
-              >
-                {profile.rotatingRoles[roleIndex]}
-              </span>
-              <span className="invisible font-display font-semibold italic">
-                {profile.rotatingRoles[roleIndex]}
-              </span>
-            </span>{" "}
-            Currently building{" "}
-            <span className="font-medium text-foreground">Fresh &amp; Select Gro</span>, fresh
-            off 2.5+ years of{" "}
-            <span className="font-medium text-foreground">Data &amp; Tech at JPMorganChase</span>
-            <span className="text-gold-400">.</span>
+            रोहन अजय रामानी
           </p>
 
-          <div
-            className="hero-in mt-9 flex flex-wrap items-center gap-3"
-            style={{ animationDelay: "300ms" }}
+          {/* MONUMENTAL NAME */}
+          <h1
+            className="hero-in font-display text-[clamp(3rem,9vw,7rem)] font-bold leading-[0.92] tracking-[-0.04em] text-foreground"
+            style={{ animationDelay: "120ms" }}
           >
-            <a href="#experience" className="btn-saffron group">
-              See my story
-              <ArrowRight className="size-4 transition group-hover:translate-x-0.5" />
+            ROHAN<br />
+            AJAY <span className="text-chroma">RAMANI</span>
+          </h1>
+
+          {/* TAGLINE */}
+          <p
+            className="hero-in mt-7 max-w-[640px] text-balance text-[17px] leading-[1.55] text-muted-foreground md:text-[18px]"
+            style={{ animationDelay: "240ms" }}
+          >
+            Engineer <span className="text-foreground">→</span> Operator. Currently building{" "}
+            <span className="font-semibold text-foreground">Fresh &amp; Select Gro</span> and{" "}
+            <span className="font-semibold text-foreground">KyRo Core</span>, fresh off 2.5+ years of{" "}
+            <span className="font-semibold text-foreground">Data &amp; Tech at JPMorganChase</span>.
+            Two published papers, one academic medal, ten years of community work.
+          </p>
+
+          {/* CTAs */}
+          <div
+            className="hero-in mt-10 flex flex-wrap items-center gap-3"
+            style={{ animationDelay: "320ms" }}
+          >
+            <a href="#experience" className="btn-primary group">
+              See the Trail
+              <ArrowDown className="size-4 transition group-hover:translate-y-0.5" />
             </a>
             <a
               href={profile.resume}
@@ -104,87 +101,116 @@ export function Hero() {
             </a>
           </div>
 
-          <ul
-            className="hero-in mt-10 flex items-center gap-3"
+          {/* SOCIALS row + ID */}
+          <div
+            className="hero-in mt-10 flex flex-wrap items-center gap-6"
             style={{ animationDelay: "400ms" }}
           >
-            {[
-              { href: profile.socials.linkedin, icon: Linkedin, label: "LinkedIn" },
-              { href: profile.socials.github, icon: Github, label: "GitHub" },
-              { href: profile.socials.email, icon: Mail, label: "Email" },
-            ].map(({ href, icon: Icon, label }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener"
-                  aria-label={label}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-gold-400/25 bg-white/[0.025] text-foreground/80 transition hover:-translate-y-0.5 hover:border-gold-400 hover:text-gold-400"
-                >
-                  <Icon className="size-4" />
-                </a>
-              </li>
-            ))}
-          </ul>
+            <ul className="flex items-center gap-2">
+              {[
+                { href: profile.socials.linkedin, icon: Linkedin, label: "LinkedIn" },
+                { href: profile.socials.github, icon: Github, label: "GitHub" },
+                { href: profile.socials.email, icon: Mail, label: "Email" },
+              ].map(({ href, icon: Icon, label }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={label}
+                    className="grid h-10 w-10 place-items-center rounded-md border border-white/15 bg-white/[0.025] text-foreground/80 transition hover:-translate-y-0.5 hover:border-cyan-400 hover:text-cyan-400"
+                  >
+                    <Icon className="size-4" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="label-code">
+              <span aria-hidden className="h-px w-6 bg-white/15" />
+              ID/0001 · Mumbai-born
+            </div>
+          </div>
         </div>
 
-        {/* "Currently" card — editorial */}
+        {/* RIGHT — Data panel (replaces card) */}
         <aside
-          className="hero-in relative hidden md:block"
-          style={{ animationDelay: "450ms" }}
+          className="hero-in relative hidden md:col-span-5 md:flex md:items-center"
+          style={{ animationDelay: "460ms" }}
         >
-          <div className="relative ml-auto max-w-[420px] glass rounded-[28px] p-7 shadow-2xl shadow-black/40">
-            {/* Om watermark in corner */}
-            <OmGlyph className="absolute right-5 top-4 text-4xl text-gold-400/25" />
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-gold-400">
-              Currently
-            </p>
-            <h3 className="heading-display mt-3 text-3xl leading-[1.05]">
-              Engineer turned <em className="text-grad italic">operator</em>.
-            </h3>
-            <p className="mt-4 text-[14px] leading-relaxed text-muted-foreground">
-              Building <span className="text-foreground">Fresh &amp; Select Gro</span> across the
-              Mumbai Metropolitan Region — and putting{" "}
-              <span className="text-foreground">KyRo Core</span> together brick by brick.
-            </p>
-            <div className="mt-5 grid grid-cols-3 gap-3 border-t border-gold-400/15 pt-4">
-              <div>
-                <p className="heading-display text-3xl font-medium text-grad">2.5y</p>
-                <p className="mt-0.5 text-[10.5px] font-mono uppercase tracking-[0.16em] text-muted-foreground">
-                  at JPMC
-                </p>
+          <div className="relative ml-auto w-full max-w-[440px]">
+            {/* Corner brackets — sci-fi targeting */}
+            <CornerBracket className="absolute -left-2 -top-2 size-5 text-saffron-400" />
+            <CornerBracket className="absolute -right-2 -top-2 size-5 -scale-x-100 text-saffron-400" />
+            <CornerBracket className="absolute -left-2 -bottom-2 size-5 -scale-y-100 text-cyan-400" />
+            <CornerBracket className="absolute -right-2 -bottom-2 size-5 -scale-100 text-cyan-400" />
+
+            <div className="surface scanlines noise rounded-lg p-7 shadow-2xl shadow-black/40">
+              {/* Top bar */}
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <span className="label-code text-saffron-400">SYS.CURRENT</span>
+                <OmGlyph className="text-xl text-saffron-400/80" />
               </div>
-              <div>
-                <p className="heading-display text-3xl font-medium text-grad">6k+</p>
-                <p className="mt-0.5 text-[10.5px] font-mono uppercase tracking-[0.16em] text-muted-foreground">
-                  Mumbai Ignite
-                </p>
+
+              <h3 className="mt-4 font-display text-[26px] font-bold uppercase leading-tight tracking-tight">
+                Engineer<br />
+                <span className="text-chroma">turned Operator.</span>
+              </h3>
+
+              <p className="mt-3 text-[13.5px] leading-[1.6] text-muted-foreground">
+                Building <span className="text-foreground">Fresh &amp; Select Gro</span> across the
+                Mumbai Metropolitan Region · Putting{" "}
+                <span className="text-foreground">KyRo Core</span> together brick by brick.
+              </p>
+
+              <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-4">
+                <div>
+                  <p className="font-display text-[28px] font-bold leading-none text-saffron-400">2.5y</p>
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                    at JPMC
+                  </p>
+                </div>
+                <div>
+                  <p className="font-display text-[28px] font-bold leading-none text-cyan-400">6k+</p>
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                    Mumbai Ignite
+                  </p>
+                </div>
+                <div>
+                  <p className="font-display text-[28px] font-bold leading-none text-magenta-400">9.76</p>
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                    SRM CGPA
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="heading-display text-3xl font-medium text-grad">9.76</p>
-                <p className="mt-0.5 text-[10.5px] font-mono uppercase tracking-[0.16em] text-muted-foreground">
-                  SRM CGPA
-                </p>
+
+              {/* Bottom row — pulsing dots */}
+              <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                <span className="flex items-center gap-1.5">
+                  <span className="size-1.5 animate-glow-pulse rounded-full bg-emerald-400" />
+                  Signal · Open
+                </span>
+                <span>v2025.11</span>
               </div>
             </div>
           </div>
         </aside>
       </div>
 
-      {/* Scroll cue */}
+      {/* Bottom scroll cue */}
       <a
         href="#about"
-        className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.26em] text-muted-foreground"
-        style={{ animation: "scroll-cue 2.2s ease-in-out infinite" }}
+        className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 font-mono text-[10px] uppercase tracking-[0.26em] text-muted-foreground"
+        style={{ animation: "scroll-cue 2.4s ease-in-out infinite" }}
       >
+        <span aria-hidden className="h-px w-8 bg-saffron-400/50" />
         Scroll
-        <ChevronDown className="size-3 text-gold-400" />
+        <ArrowDown className="size-3 text-cyan-400" />
       </a>
 
       <style>{`
         .hero-in {
           opacity: 0;
-          transform: translateY(18px);
+          transform: translateY(20px);
           animation: hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
         @keyframes hero-in {

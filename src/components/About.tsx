@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { MapPin, Mail, Phone, Sparkles } from "lucide-react";
+import { MapPin, Mail, Phone } from "lucide-react";
 import { profile, skillGroups, stats } from "../data/profile";
 import { SectionHead } from "./SectionHead";
-import { Mandala, OmGlyph } from "./decor/Motifs";
+import { SriYantra, OmGlyph, CornerBracket } from "./decor/Motifs";
 
 function renderMarkdownLite(text: string) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
@@ -23,44 +23,42 @@ export function About() {
     <section id="about" className="section-pad container-page">
       <SectionHead
         num="01"
-        kicker="About"
-        title="Engineer turned operator. Builder with a"
-        titleItalic="generalist's curiosity"
-        subtitle="Code, commerce, and community — the threads of the last six years, told plain."
+        kicker="INDEX · ABOUT"
+        title="Engineer turned"
+        titleEmphasis="Operator"
+        subtitle="Code, commerce, community. Six years of building in parallel — full stack engineer at a global bank, operator at a Mumbai grocery business, AI/Data student at IIT Madras, and ten years deep in volunteering."
       />
 
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:grid-rows-[auto_auto]">
+      {/* Bento grid */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-[auto_auto] md:gap-5">
         {/* BIO — wide */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="glass relative overflow-hidden rounded-[26px] p-8 md:col-span-2 md:row-span-2 md:p-10"
+          className="surface relative overflow-hidden rounded-lg p-7 md:col-span-2 md:row-span-2 md:p-9"
         >
-          {/* Subtle mandala in corner */}
-          <Mandala className="absolute -right-12 -top-12 h-56 w-56 text-gold-400 opacity-[0.07] animate-spin-slow" />
-          <div className="absolute -left-32 -bottom-32 h-64 w-64 rounded-full bg-saffron-500/10 blur-3xl" />
+          <SriYantra className="absolute -right-14 -top-14 h-56 w-56 text-saffron-400 opacity-[0.08] animate-spin-slow" />
+          <div className="absolute -left-32 -bottom-32 h-72 w-72 rounded-full bg-saffron-400/8 blur-3xl" />
 
           <div className="relative">
             <div className="flex items-center gap-3">
-              <Sparkles className="size-4 text-gold-400" />
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-gold-400">
-                On record
-              </p>
+              <span aria-hidden className="h-px w-6 bg-saffron-400/60" />
+              <span className="label-code text-saffron-400">DOSSIER · 01</span>
             </div>
-            <div className="mt-5 space-y-5 text-balance text-[15.5px] leading-[1.7] text-muted-foreground md:text-[16.5px]">
+            <div className="mt-5 space-y-5 text-balance text-[15px] leading-[1.7] text-muted-foreground md:text-[16px]">
               {profile.about.map((p, i) => (
                 <p key={i}>{renderMarkdownLite(p)}</p>
               ))}
             </div>
 
-            <div className="mt-7 flex flex-wrap gap-2">
+            <div className="mt-7 flex flex-wrap gap-1.5">
               {["Java", "Python", "React", "Vue.js", "PostgreSQL", "Operations", "Agile · Scrum"].map(
                 (s) => (
                   <span
                     key={s}
-                    className="inline-flex items-center rounded-full border border-gold-400/20 bg-white/[0.02] px-3 py-1 font-mono text-[11px] text-muted-foreground"
+                    className="inline-flex items-center rounded-sm border border-white/10 bg-white/[0.015] px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted-foreground"
                   >
                     {s}
                   </span>
@@ -70,65 +68,73 @@ export function About() {
           </div>
         </motion.div>
 
-        {/* Photo */}
+        {/* PHOTO */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-          className="glass relative overflow-hidden rounded-[26px]"
+          className="surface relative overflow-hidden rounded-lg"
         >
+          <CornerBracket className="absolute left-3 top-3 z-10 size-4 text-saffron-400" />
+          <CornerBracket className="absolute right-3 top-3 z-10 size-4 -scale-x-100 text-saffron-400" />
+          <CornerBracket className="absolute left-3 bottom-3 z-10 size-4 -scale-y-100 text-cyan-400" />
+          <CornerBracket className="absolute right-3 bottom-3 z-10 size-4 -scale-100 text-cyan-400" />
+
           <img
             src="/images/profile2.jpeg"
             alt="Rohan Ajay Ramani"
             className="aspect-[4/5] w-full object-cover object-[center_20%]"
+            style={{ filter: "saturate(1.1) contrast(1.05)" }}
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/85 via-background/0 to-transparent" />
-          <div className="absolute left-5 top-5">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-gold-400/35 bg-background/60 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em] text-gold-400 backdrop-blur">
-              <span className="size-1.5 rounded-full bg-emerald-400" /> Mumbai
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/90 via-background/0 to-transparent" />
+          <div className="absolute left-5 top-5 z-10">
+            <span className="label-pill text-saffron-400" style={{ borderColor: "rgb(255 122 38 / 0.4)", background: "rgb(6 6 15 / 0.55)" }}>
+              <span className="size-1.5 rounded-full bg-emerald-400" /> Mumbai · MMR
             </span>
           </div>
-          <div className="absolute bottom-5 left-5 right-5">
-            <p className="devanagari text-[15px] text-gold-400">रोहन अजय रामानी</p>
-            <p className="heading-display mt-1 text-xl font-medium text-foreground">
-              Rohan Ajay Ramani
+          <div className="absolute bottom-5 left-5 right-5 z-10">
+            <p className="devanagari text-[14px] text-saffron-400">रोहन अजय रामानी</p>
+            <p className="mt-1 font-display text-xl font-bold uppercase tracking-tight text-foreground">
+              Rohan A. Ramani
             </p>
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-              {profile.shortIdentity}
+            <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              Engineer · Operator · Builder
             </p>
           </div>
         </motion.div>
 
-        {/* Contact mini card */}
+        {/* CONTACT mini */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.16 }}
-          className="glass relative rounded-[26px] p-6"
+          className="surface relative rounded-lg p-6"
         >
-          <OmGlyph className="absolute right-5 top-4 text-3xl text-gold-400/25" />
-          <div className="flex items-center gap-2">
-            <MapPin className="size-4 text-gold-400" />
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-gold-400">
-              Based in
-            </p>
+          <OmGlyph className="absolute right-5 top-4 text-2xl text-saffron-400/25" />
+          <div className="flex items-center gap-2.5">
+            <MapPin className="size-4 text-saffron-400" />
+            <p className="label-code text-saffron-400">LOCATION</p>
           </div>
-          <p className="heading-display mt-2 text-2xl">Mumbai, India</p>
-          <p className="text-[13px] text-muted-foreground">Navi Mumbai · MMR</p>
+          <p className="mt-2 font-display text-2xl font-bold uppercase tracking-tight">
+            Mumbai, India
+          </p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            Navi Mumbai · MMR
+          </p>
 
-          <div className="mt-5 grid gap-3 border-t border-gold-400/15 pt-5">
+          <div className="mt-5 grid gap-3 border-t border-white/10 pt-5">
             <a
               href={profile.socials.email}
-              className="flex items-center gap-2 text-[13.5px] text-muted-foreground transition hover:text-gold-400"
+              className="flex items-center gap-2 text-[13px] text-muted-foreground transition hover:text-cyan-400"
             >
               <Mail className="size-3.5" />
               {profile.emailAddress}
             </a>
             <a
               href={profile.socials.phone}
-              className="flex items-center gap-2 text-[13.5px] text-muted-foreground transition hover:text-gold-400"
+              className="flex items-center gap-2 text-[13px] text-muted-foreground transition hover:text-cyan-400"
             >
               <Phone className="size-3.5" />
               {profile.phoneNumber}
@@ -138,7 +144,7 @@ export function About() {
       </div>
 
       {/* Stats strip */}
-      <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-6 md:gap-5">
+      <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-6 md:gap-4">
         {stats.map((s, i) => (
           <motion.div
             key={s.label}
@@ -146,9 +152,9 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.55, delay: i * 0.04 }}
-            className="glass rounded-[18px] p-5 text-center"
+            className="surface rounded-md p-5 text-left"
           >
-            <p className="heading-display text-[28px] font-medium text-grad leading-none">
+            <p className="font-display text-[28px] font-bold leading-none text-chroma">
               {s.value}
             </p>
             <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -158,13 +164,15 @@ export function About() {
         ))}
       </div>
 
-      {/* Decorative divider */}
-      <div className="divider-mandala">
-        <span />
+      {/* Section divider line + label */}
+      <div className="my-16 flex items-center gap-3 text-muted-foreground md:my-20">
+        <span aria-hidden className="h-px w-12 bg-saffron-400/60" />
+        <span className="label-code">STACK · INDEX</span>
+        <span aria-hidden className="h-px flex-1 bg-white/10" />
       </div>
 
       {/* Skills */}
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {skillGroups.map((group, i) => (
           <motion.div
             key={group.name}
@@ -172,17 +180,17 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.55, delay: i * 0.06 }}
-            className="glass rounded-[24px] p-7"
+            className="surface rounded-lg p-7"
           >
-            <h3 className="heading-display mb-5 flex items-center gap-3 text-xl">
-              <span className={`size-2.5 rounded-full ${group.dot}`} />
+            <h3 className="mb-5 flex items-center gap-3 font-display text-lg font-bold uppercase tracking-tight">
+              <span className={`size-2 rounded-full ${group.dot}`} />
               {group.name}
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {group.chips.map((c) => (
                 <span
                   key={c}
-                  className="inline-flex items-center rounded-full border border-gold-400/15 bg-white/[0.015] px-3 py-1 font-mono text-[11px] text-muted-foreground transition hover:border-gold-400/60 hover:text-foreground"
+                  className="inline-flex items-center rounded-sm border border-white/8 bg-white/[0.015] px-2.5 py-1 font-mono text-[10.5px] uppercase tracking-[0.1em] text-muted-foreground transition hover:border-cyan-400/60 hover:text-foreground"
                 >
                   {c}
                 </span>

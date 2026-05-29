@@ -8,21 +8,21 @@ export function Experience() {
     <section id="experience" className="section-pad container-page">
       <SectionHead
         num="02"
-        kicker="Experience"
+        kicker="TRAIL · TIMELINE"
         title="A career told in"
-        titleItalic="chapters"
+        titleEmphasis="Chapters"
         subtitle="Engineering, ops, hospitality, community — most of these overlapped at once."
       />
 
-      <ol className="relative mx-auto max-w-[900px] pl-10 md:pl-14">
-        {/* Gold timeline rail */}
+      <ol className="relative mx-auto max-w-[920px] pl-10 md:pl-12">
+        {/* Timeline rail */}
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-y-2 left-3 w-px md:left-5"
+          className="pointer-events-none absolute inset-y-2 left-3 w-px md:left-4"
           style={{
             background:
-              "linear-gradient(180deg, #ff8a3d 0%, #d4af37 50%, #3b2c8c 100%)",
-            opacity: 0.55,
+              "linear-gradient(180deg, #ff7a26 0%, #ec4899 35%, #22d3ee 75%, #06b6d4 100%)",
+            opacity: 0.65,
           }}
         />
 
@@ -35,39 +35,40 @@ export function Experience() {
             transition={{ duration: 0.6, delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
             className="relative pb-12 last:pb-0"
           >
-            {/* Marker — gold rim with saffron core */}
+            {/* Marker — small square with index */}
             <span
-              className="absolute -left-7 top-5 grid h-6 w-6 place-items-center rounded-full md:-left-[2.35rem] md:h-7 md:w-7"
+              className="absolute -left-7 top-5 grid h-6 w-6 place-items-center rounded-sm border border-white/20 bg-background font-mono text-[9px] font-semibold text-saffron-400 md:-left-[1.95rem]"
               style={{
-                background: "linear-gradient(135deg, #ff9d4d, #d4af37)",
                 boxShadow:
-                  "0 0 0 4px hsl(var(--background)), 0 0 0 5px rgb(212 175 55 / 0.4), 0 0 24px rgb(255 138 61 / 0.55)",
+                  "0 0 0 4px hsl(var(--background)), 0 0 18px rgb(255 122 38 / 0.5)",
               }}
             >
-              <span className="size-1.5 rounded-full bg-background" />
+              {String(idx + 1).padStart(2, "0")}
             </span>
 
-            <div className="glass group rounded-[24px] p-7 transition hover:-translate-y-0.5 hover:border-gold-400/40">
+            <div className="surface group rounded-lg p-7 transition hover:-translate-y-0.5 hover:border-saffron-400/40">
               <div className="flex flex-wrap items-baseline justify-between gap-3">
                 <div>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-gold-400">
+                  <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-saffron-400">
                     {exp.start} — {exp.end}
                     {exp.duration && (
                       <span className="ml-2 text-muted-foreground">· {exp.duration}</span>
                     )}
                   </p>
-                  <h3 className="heading-display mt-2.5 text-[22px] leading-tight md:text-[26px]">
+                  <h3 className="mt-2.5 font-display text-[22px] font-bold uppercase leading-tight tracking-tight md:text-[26px]">
                     {exp.role}
                   </h3>
-                  <p className="mt-1.5 text-[14.5px] font-medium text-saffron-400">
+                  <p className="mt-1.5 font-mono text-[12px] uppercase tracking-[0.16em] text-cyan-400">
                     {exp.company}
                     {exp.type && (
-                      <span className="ml-2 text-muted-foreground">· {exp.type}</span>
+                      <span className="ml-2 normal-case tracking-normal text-muted-foreground">
+                        · {exp.type}
+                      </span>
                     )}
                   </p>
                 </div>
                 {exp.location && (
-                  <span className="inline-flex items-center gap-1 rounded-full border border-gold-400/20 bg-white/[0.025] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                  <span className="inline-flex items-center gap-1 rounded-sm border border-white/10 bg-white/[0.025] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
                     <MapPin className="size-3" />
                     {exp.location}
                   </span>
@@ -78,11 +79,11 @@ export function Experience() {
                 {exp.bullets.map((b, i) => (
                   <li
                     key={i}
-                    className="flex gap-3 text-[14.5px] leading-[1.65] text-muted-foreground"
+                    className="flex gap-3 text-[14px] leading-[1.65] text-muted-foreground"
                   >
                     <span
                       aria-hidden
-                      className="mt-[10px] size-1 flex-none rounded-full bg-gold-400/70"
+                      className="mt-2.5 size-1 flex-none rounded-full bg-saffron-400/70"
                     />
                     <span>{b}</span>
                   </li>
@@ -94,7 +95,7 @@ export function Experience() {
                   {exp.skills.map((s) => (
                     <span
                       key={s}
-                      className="inline-flex items-center rounded-full border border-gold-400/15 bg-white/[0.015] px-2.5 py-0.5 font-mono text-[10px] text-muted-foreground"
+                      className="inline-flex items-center rounded-sm border border-white/8 bg-white/[0.015] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground"
                     >
                       {s}
                     </span>

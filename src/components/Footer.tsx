@@ -2,46 +2,44 @@ import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 import { profile } from "../data/profile";
 
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Story" },
+  { href: "#about", label: "Index" },
+  { href: "#experience", label: "Trail" },
   { href: "#work", label: "Work" },
-  { href: "#education", label: "Learning" },
+  { href: "#education", label: "Roots" },
   { href: "#honors", label: "Honors" },
-  { href: "#contact", label: "Connect" },
+  { href: "#contact", label: "Signal" },
 ];
 
 export function Footer() {
   return (
-    <footer className="relative z-10 border-t border-gold-400/10 bg-background/40 backdrop-blur-xl">
+    <footer className="relative z-10 border-t border-white/8 bg-background/40 backdrop-blur-xl">
       <div className="container-page grid grid-cols-1 gap-8 py-14 md:grid-cols-3 md:items-center md:gap-6">
         <div>
-          <a href="#home" className="inline-flex items-center gap-3 font-display font-medium">
+          <a href="#home" className="inline-flex items-center gap-3 font-display font-semibold">
             <span
-              className="grid h-9 w-9 place-items-center rounded-full text-sm"
+              className="grid h-9 w-9 place-items-center rounded-md text-sm font-bold"
               style={{
-                background: "linear-gradient(135deg, #ff9d4d 0%, #d4af37 100%)",
-                color: "#0b0710",
+                background: "linear-gradient(135deg, #ff8a3d 0%, #ec4899 70%, #22d3ee 130%)",
+                color: "#06060f",
               }}
             >
-              <span className="devanagari text-[18px] -translate-y-px">र</span>
+              <span className="devanagari text-[16px] -translate-y-px">र</span>
             </span>
-            <span className="text-base">
-              Rohan<span className="text-gold-400">.</span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-foreground">
+              Rohan A. Ramani
             </span>
           </a>
-          <p className="mt-4 text-[13.5px] leading-relaxed text-muted-foreground">
-            Built with chai in Mumbai.
-            <br />
-            React, Tailwind, three.js — and a lot of late nights.
+          <p className="mt-4 max-w-[280px] text-[12.5px] leading-[1.65] text-muted-foreground">
+            Engineer turned operator · Mumbai. Building, shipping, repeating — with chai.
           </p>
         </div>
 
-        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2" aria-label="Footer">
+        <nav className="flex flex-wrap justify-center gap-x-5 gap-y-2" aria-label="Footer">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-[13.5px] text-muted-foreground transition hover:text-gold-400"
+              className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground transition hover:text-cyan-400"
             >
               {l.label}
             </a>
@@ -61,7 +59,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener"
                 aria-label={label}
-                className="grid h-9 w-9 place-items-center rounded-full border border-gold-400/25 bg-white/[0.025] text-muted-foreground transition hover:-translate-y-0.5 hover:border-gold-400 hover:text-gold-400"
+                className="grid h-9 w-9 place-items-center rounded-md border border-white/15 bg-white/[0.025] text-muted-foreground transition hover:-translate-y-0.5 hover:border-cyan-400 hover:text-cyan-400"
               >
                 <Icon className="size-4" />
               </a>
@@ -69,9 +67,12 @@ export function Footer() {
           ))}
         </ul>
       </div>
-      <div className="container-page border-t border-dashed border-gold-400/15 py-5 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-        <span className="devanagari mr-3 normal-case tracking-normal text-gold-400/70">© मुंबई</span>
-        © {new Date().getFullYear()} Rohan Ajay Ramani · All rights reserved
+      <div className="container-page flex flex-wrap items-center justify-between gap-3 border-t border-dashed border-white/10 py-5 font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted-foreground">
+        <span>
+          <span className="devanagari mr-3 normal-case tracking-normal text-saffron-400/70">मुंबई</span>
+          © {new Date().getFullYear()} · All rights reserved
+        </span>
+        <span>v2025.11 · built in mumbai · with chai</span>
       </div>
     </footer>
   );
