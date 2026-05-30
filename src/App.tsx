@@ -9,10 +9,12 @@ import { Experience } from "./components/Experience";
 import { Projects } from "./components/Projects";
 import { Education } from "./components/Education";
 import { Honors } from "./components/Honors";
+import { Recommendations } from "./components/Recommendations";
 import { Volunteering } from "./components/Volunteering";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { ScrollTop } from "./components/ScrollTop";
+import { ScrollProgress } from "./components/ScrollProgress";
 import { BootLoader } from "./components/BootLoader";
 import { Cursor } from "./components/Cursor";
 
@@ -61,8 +63,15 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen overflow-clip">
+      <a
+        href="#about"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[120] focus:rounded-md focus:bg-saffron-500 focus:px-4 focus:py-2 focus:font-mono focus:text-[12px] focus:uppercase focus:tracking-[0.16em] focus:text-background"
+      >
+        Skip to content
+      </a>
       <Ambient />
       <Cursor />
+      <ScrollProgress />
       <BootLoader onDone={() => setBooted(true)} />
       <Header />
       <main className="relative z-10">
@@ -73,6 +82,7 @@ export default function App() {
         <Projects />
         <Education />
         <Honors />
+        <Recommendations />
         <Volunteering />
         <Contact />
       </main>

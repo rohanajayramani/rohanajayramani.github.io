@@ -1,10 +1,16 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, FileText, Github } from "lucide-react";
+import { ArrowUpRight, Award, Code2, FileText, Github, ScrollText } from "lucide-react";
 import { useRef, type MouseEvent } from "react";
 import { projects } from "../data/profile";
 import { SectionHead } from "./SectionHead";
 import { cn } from "../lib/utils";
 import { CornerBracket } from "./decor/Motifs";
+
+const KIND = {
+  paper: { Icon: ScrollText, label: "PAPER", cls: "text-cyan-400 border-cyan-400/35 bg-cyan-400/10" },
+  award: { Icon: Award, label: "AWARD", cls: "text-saffron-400 border-saffron-400/35 bg-saffron-400/10" },
+  code: { Icon: Code2, label: "BUILD", cls: "text-magenta-400 border-magenta-400/35 bg-magenta-400/10" },
+} as const;
 
 function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -64,10 +70,25 @@ export function Projects() {
           >
             <TiltCard className="rounded-lg">
               <article className="surface group relative flex h-full flex-col overflow-hidden rounded-lg p-7 transition hover:border-saffron-400/40">
-                <CornerBracket className="absolute right-3 top-3 size-4 -scale-x-100 text-saffron-400/50" />
+                <CornerBracket className="absolute right-3 top-3 size-4 -scale-x-100 text-saffron-400/40" />
+
+                {/* kind badge */}
+                {(() => {
+                  const k = KIND[p.kind];
+                  return (
+                    <div className="relative mb-5 flex items-center justify-between">
+                      <span className={cn("grid h-11 w-11 place-items-center rounded-md border", k.cls)}>
+                        <k.Icon className="size-5" />
+                      </span>
+                      <span className={cn("rounded-sm border px-2 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.18em]", k.cls)}>
+                        {k.label}
+                      </span>
+                    </div>
+                  );
+                })()}
 
                 <div className="relative flex flex-wrap items-center gap-2">
-                  <span className="inline-flex items-center rounded-sm border border-saffron-400/35 bg-saffron-400/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-saffron-400">
+                  <span className="inline-flex items-center rounded-sm border border-white/10 bg-white/[0.02] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-foreground/80">
                     {p.tag}
                   </span>
                   <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
@@ -75,7 +96,7 @@ export function Projects() {
                   </span>
                 </div>
 
-                <h3 className="relative mt-5 font-display text-[28px] font-bold uppercase leading-tight tracking-tight md:text-[30px]">
+                <h3 className="relative mt-4 font-display text-[26px] font-bold uppercase leading-tight tracking-tight md:text-[28px]">
                   {p.title}
                 </h3>
                 <p className="relative mt-3 max-w-prose text-[14px] leading-[1.65] text-muted-foreground">

@@ -14,6 +14,7 @@ const navItems = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("home");
   const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
@@ -34,6 +35,25 @@ export function Header() {
     window.addEventListener("scroll", handler, { passive: true });
     handler();
     return () => window.removeEventListener("scroll", handler);
+  }, []);
+
+  // Scroll-spy — highlight the section currently in view
+  useEffect(() => {
+    const ids = navItems.map((n) => n.href.slice(1));
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    if (!sections.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+    );
+    sections.forEach((s) => io.observe(s));
+    return () => io.disconnect();
   }, []);
 
   const toggleTheme = () => {
@@ -72,16 +92,34 @@ export function Header() {
         </a>
 
         <nav className="hidden items-center gap-0.5 rounded-md border border-white/10 bg-white/[0.02] p-1 backdrop-blur-xl lg:flex">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="group relative inline-flex items-center gap-2 rounded-sm px-3 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:bg-white/[0.04] hover:text-foreground"
-            >
-              <span className="text-[9px] text-saffron-400/80">{item.num}</span>
-              {item.label}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const isActive = active === item.href.slice(1);
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? "true" : undefined}
+                className={cn(
+                  "group relative inline-flex items-center gap-2 rounded-sm px-3 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.16em] transition-colors",
+                  isActive
+                    ? "bg-white/[0.06] text-foreground"
+                    : "text-muted-foreground hover:bg-white/[0.04] hover:text-foreground",
+                )}
+              >
+                <span className={cn("text-[9px]", isActive ? "text-saffron-400" : "text-saffron-400/80")}>
+                  {item.num}
+                </span>
+                {item.label}
+                {isActive && (
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-2 -bottom-px h-px"
+                    style={{ background: "linear-gradient(90deg, #ff7a26, #22d3ee)" }}
+                  />
+                )}
+              </a>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-2">

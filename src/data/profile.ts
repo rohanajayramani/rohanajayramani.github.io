@@ -202,6 +202,7 @@ export type Project = {
   repo?: string;
   doc?: string;
   image?: string;
+  kind: "paper" | "award" | "code";
   span?: "wide" | "tall" | "default";
 };
 
@@ -213,7 +214,7 @@ export const projects: Project[] = [
     blurb:
       "Navigating IT Careers in a Recession Era — AI and digital tooling to help fresh graduates find footing in a tough market. Published in Springer Nature CCIS, Vol. 2688.",
     href: "https://lnkd.in/dcDrZ8tZ",
-    image: "/images/educat/par.png",
+    kind: "paper",
     span: "wide",
   },
   {
@@ -222,7 +223,7 @@ export const projects: Project[] = [
     period: "Dec 2023",
     blurb:
       "Internet Fact-Checking using Rating Trust Score by Verified Users — a crowdsourcing protocol that scores trust from verified, consistent commenters to slow misinformation.",
-    image: "/images/educat/3.png",
+    kind: "paper",
   },
   {
     title: "Modern Application Development",
@@ -230,6 +231,7 @@ export const projects: Project[] = [
     period: "2024",
     blurb:
       "Scalable real-time application using Vue.js with Redis caching and Celery job queues — recognised by IIT-M as best project that term.",
+    kind: "award",
   },
   {
     title: "Parsify",
@@ -239,6 +241,7 @@ export const projects: Project[] = [
       "Lightweight compiler: lex, parse and generate intermediate code for a custom grammar — an end-to-end pass through a compiler front-end.",
     repo: "https://github.com/rohanajayramani/Parsify-Compiler",
     doc: "https://drive.google.com/file/d/1H5UxTpdFU_DYy5O3ZJJB9mbwpcLzPb1q/view?usp=share_link",
+    kind: "code",
   },
   {
     title: "3Dify",
@@ -248,6 +251,7 @@ export const projects: Project[] = [
       "Single-image 3D reconstruction — deep learning to lift flat 2D imagery into three-dimensional representations.",
     repo: "https://github.com/rohanajayramani/3Dify",
     doc: "https://drive.google.com/file/d/1DbVIxY6N5hCt1XmLd2rOHZ3J2emaW2of/view?usp=sharing",
+    kind: "code",
   },
 ];
 
@@ -315,6 +319,25 @@ export const volunteering = [
       "Led projects — school wall painting, cleanliness drives, literacy awareness events — as President-Elect of the local Rotaract.",
       "Worked with fellow Rotaractors to strengthen civic responsibility and youth participation in community action.",
     ],
+  },
+];
+
+export const recommendations = [
+  {
+    quote:
+      "Rohan possesses rare leadership acumen — his ebullience, receptiveness, and resoluteness showcase his adeptness at surmounting challenges and leading others. He was not only assiduous but instrumental in engendering a propitious classroom milieu. I heartily recommend this talented and dedicated young man.",
+    name: "Dr. B. Jothi",
+    title: "Associate Professor · SRM IST",
+    note: "Mentored Rohan for four years",
+    initials: "BJ",
+  },
+  {
+    quote:
+      "Rohan is an excellent student, excelling in programming and academics. He is responsible and punctual, and his strong interpersonal skills make him an effective collaborator. His eagerness to learn and his ability to communicate complex ideas clearly distinguish him — both academically and personally.",
+    name: "Dr. Hariharan B",
+    title: "Associate Professor · SRM IST",
+    note: "Was Rohan's mentor",
+    initials: "HB",
   },
 ];
 

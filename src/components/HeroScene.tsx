@@ -200,10 +200,10 @@ function OuterIcosa() {
   );
 }
 
-function StarField() {
+function StarField({ count = 900 }: { count?: number }) {
   const positions = useMemo(() => {
-    const arr = new Float32Array(900 * 3);
-    for (let i = 0; i < 900; i++) {
+    const arr = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
       const r = 4.5 + Math.random() * 5;
       const a = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
@@ -212,7 +212,7 @@ function StarField() {
       arr[i * 3 + 2] = r * Math.cos(phi);
     }
     return arr;
-  }, []);
+  }, [count]);
   const ref = useRef<THREE.Points>(null!);
   useFrame((_, dt) => {
     if (ref.current) ref.current.rotation.y += dt * 0.015;
@@ -225,12 +225,15 @@ function StarField() {
 }
 
 export function HeroScene() {
+  const mobile = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
+
   return (
     <Canvas
-      dpr={[1, 1.8]}
+      dpr={mobile ? [1, 1.4] : [1, 1.8]}
       camera={{ position: [0, 0, 6.6], fov: 42 }}
       style={{ position: "absolute", inset: 0 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      frameloop="always"
     >
       <Suspense fallback={null}>
         <ambientLight intensity={0.6} />
@@ -239,24 +242,26 @@ export function HeroScene() {
         <pointLight position={[0, 4, 5]} intensity={0.8} color={MAGENTA} />
 
         {/* Back chakra spoke wheels (two layers, counter-rotating) */}
-        <ChakraSpokes count={64} inner={2.2} outer={4.8} color={GOLD} z={-0.8} speed={0.03} opacity={0.28} />
-        <ChakraSpokes count={32} inner={1.9} outer={4.4} color={SAFFRON} z={-0.7} speed={-0.05} opacity={0.22} />
+        <ChakraSpokes count={mobile ? 40 : 64} inner={2.2} outer={4.8} color={GOLD} z={-0.8} speed={0.03} opacity={0.28} />
+        {!mobile && (
+          <ChakraSpokes count={32} inner={1.9} outer={4.4} color={SAFFRON} z={-0.7} speed={-0.05} opacity={0.22} />
+        )}
 
         <Float speed={1.0} rotationIntensity={0.22} floatIntensity={0.4}>
           <SriYantra3D />
           <LotusDots radius={2.55} count={12} color={SAFFRON} direction={-1} size={0.04} />
           <LotusDots radius={3.05} count={18} color={GOLD} direction={1} />
-          <LotusDots radius={3.55} count={28} color={CYAN} direction={-1} size={0.028} />
+          {!mobile && <LotusDots radius={3.55} count={28} color={CYAN} direction={-1} size={0.028} />}
 
           {/* concentric rings */}
           <Ring radius={2.7} tube={0.01} color={SAFFRON} emissive={1.2} speed={0.05} />
           <Ring radius={2.95} tube={0.008} color={GOLD} emissive={1.0} speed={-0.04} tilt={0.15} />
           <Ring radius={3.9} tube={0.009} color={CYAN} emissive={1.0} speed={0.03} tilt={0.3} />
-          <Ring radius={4.2} tube={0.006} color={MAGENTA} emissive={0.9} speed={-0.025} tilt={-0.3} />
+          {!mobile && <Ring radius={4.2} tube={0.006} color={MAGENTA} emissive={0.9} speed={-0.025} tilt={-0.3} />}
         </Float>
 
         <OuterIcosa />
-        <StarField />
+        <StarField count={mobile ? 450 : 900} />
 
         <OrbitControls
           enableZoom={false}

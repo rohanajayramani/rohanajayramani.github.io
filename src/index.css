@@ -74,6 +74,17 @@
     color: hsl(var(--primary-foreground));
   }
 
+  /* Keyboard focus — visible ring (system cursor is hidden, so this matters) */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  /* Don't show the ring for mouse clicks, only keyboard */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
