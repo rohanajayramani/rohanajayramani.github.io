@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <title>404 · Lost the trail — Rohan Ajay Ramani</title>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;800&family=Geist+Mono:wght@400;500&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet" />
+    <style>
+      * { margin: 0; box-sizing: border-box; }
+      :root { --saffron: #ff7a26; --cyan: #22d3ee; --magenta: #ec4899; }
+      html, body { height: 100%; }
+      body {
+        background: #06060f;
+        color: #f5f5f5;
+        font-family: "Geist", system-ui, sans-serif;
+        display: grid;
+        place-items: center;
+        min-height: 100svh;
+        overflow: hidden;
+        position: relative;
+        background-image:
+          radial-gradient(ellipse 60% 50% at 50% -10%, rgba(255,122,38,0.10), transparent 60%),
+          radial-gradient(ellipse 60% 50% at 90% 100%, rgba(34,211,238,0.08), transparent 60%);
+      }
+      .grid {
+        position: fixed; inset: 0; z-index: 0; opacity: 0.5;
+        background-image:
+          linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 56px 56px;
+        -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 80%);
+        mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 80%);
+      }
+      .wrap { position: relative; z-index: 1; text-align: center; padding: 24px; }
+      .pill {
+        display: inline-flex; align-items: center; gap: 8px;
+        border: 1px solid rgba(255,122,38,0.35); border-radius: 999px;
+        padding: 7px 14px; font-family: "Geist Mono", monospace; font-size: 11px;
+        letter-spacing: 0.2em; text-transform: uppercase; color: var(--saffron);
+      }
+      .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--saffron); box-shadow: 0 0 12px var(--saffron); }
+      h1 {
+        font-size: clamp(5rem, 20vw, 11rem); font-weight: 800; line-height: 0.9;
+        letter-spacing: -0.04em; margin: 22px 0 6px;
+        background: linear-gradient(120deg, var(--saffron), var(--magenta) 55%, var(--cyan));
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+      .dev { font-family: "Tiro Devanagari Hindi", serif; color: var(--saffron); font-size: 18px; opacity: 0.85; }
+      p { color: #9a9aab; margin-top: 14px; font-size: 16px; }
+      a.btn {
+        display: inline-flex; align-items: center; gap: 8px; margin-top: 28px;
+        text-decoration: none; color: #06060f; font-weight: 600; font-size: 13px;
+        text-transform: uppercase; letter-spacing: 0.06em; padding: 13px 22px;
+        border-radius: 8px; background: linear-gradient(120deg, #ff8a3d, #ff5722 60%, #ec4899);
+        box-shadow: 0 12px 30px -10px rgba(255,122,38,0.6);
+      }
+      .code { margin-top: 36px; font-family: "Geist Mono", monospace; font-size: 11px; letter-spacing: 0.2em; color: #55556a; text-transform: uppercase; }
+    </style>
+    <script>
+      // If someone hit a sub-path, bounce them to the single-page app after a beat.
+      setTimeout(function () {
+        if (location.pathname !== "/" && location.pathname !== "/404.html") {
+          location.replace("/");
+        }
+      }, 2600);
+    </script>
+  </head>
+  <body>
+    <div class="grid"></div>
+    <div class="wrap">
+      <span class="pill"><span class="dot"></span> Signal lost · 404</span>
+      <h1>404</h1>
+      <p class="dev">रास्ता भटक गए</p>
+      <p>This trail doesn't exist. Redirecting you home — or take the shortcut.</p>
+      <a class="btn" href="/">↩ Back to start</a>
+      <div class="code">ROHAN A. RAMANI · MUMBAI · 19.0760°N · 72.8777°E</div>
+    </div>
+  </body>
+</html>

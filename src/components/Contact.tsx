@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
+  Download,
   Github,
   Instagram,
   Linkedin,
@@ -104,6 +105,18 @@ export function Contact() {
               </a>
             ))}
           </div>
+
+          <a
+            href="/rohan-ajay-ramani.vcf"
+            download
+            className="relative mt-5 flex items-center justify-between rounded-md border border-cyan-400/30 bg-cyan-400/5 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.16em] text-cyan-400 transition hover:bg-cyan-400/10"
+          >
+            <span className="inline-flex items-center gap-2">
+              <Download className="size-3.5" />
+              Save contact (.vcf)
+            </span>
+            <span aria-hidden>↓</span>
+          </a>
         </motion.div>
 
         {/* Form */}
