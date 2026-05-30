@@ -72,14 +72,16 @@ export function Hero() {
 
           {/* tagline */}
           <p
-            className="hero-in mt-7 max-w-[600px] text-balance text-[16.5px] leading-[1.55] text-muted-foreground md:text-[17.5px]"
+            className="hero-in mt-7 max-w-[620px] text-pretty text-[16.5px] leading-[1.65] text-muted-foreground md:text-[18px]"
             style={{ animationDelay: "240ms" }}
           >
-            Engineer <span className="text-foreground">→</span> Operator. Currently building{" "}
-            <span className="font-semibold text-foreground">Fresh &amp; Select Gro</span> and{" "}
-            <span className="font-semibold text-foreground">KyRo Core</span>, fresh off 2.5+ years of{" "}
-            <span className="font-semibold text-foreground">Data &amp; Tech at JPMorganChase</span>.
-            Two papers, one academic medal, ten years of community work.
+            <span className="font-semibold text-foreground">Engineer</span>
+            <span className="mx-1.5 text-saffron-400">→</span>
+            <span className="font-semibold text-foreground">Operator</span>. Currently building{" "}
+            <span className="hl hl-saffron">Fresh &amp; Select Gro</span> and{" "}
+            <span className="hl hl-gold">KyRo Core</span>, fresh off 2.5+ years of{" "}
+            <span className="hl hl-cyan">Data &amp; Tech at JPMorganChase</span>. Two papers, one
+            academic medal, ten years of community work.
           </p>
 
           {/* CTAs */}

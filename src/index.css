@@ -103,6 +103,50 @@
     @apply inline-flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.18em] text-muted-foreground;
   }
 
+  /* Inline keyword highlights — colored + underlined, not flat bold-white */
+  .hl {
+    @apply relative font-semibold text-foreground;
+    white-space: nowrap;
+  }
+  .hl::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    border-radius: 2px;
+    opacity: 0.55;
+  }
+  .hl-saffron {
+    color: #ffb486;
+  }
+  .hl-saffron::after {
+    background: linear-gradient(90deg, #ff7a26, transparent);
+  }
+  .hl-cyan {
+    color: #8be8f5;
+  }
+  .hl-cyan::after {
+    background: linear-gradient(90deg, #22d3ee, transparent);
+  }
+  .hl-gold {
+    color: #ecd58a;
+  }
+  .hl-gold::after {
+    background: linear-gradient(90deg, #d4af37, transparent);
+  }
+  .hl-magenta {
+    color: #f9a8d4;
+  }
+  .hl-magenta::after {
+    background: linear-gradient(90deg, #ec4899, transparent);
+  }
+  html.light .hl-saffron { color: #c2410c; }
+  html.light .hl-cyan { color: #0e7490; }
+  html.light .hl-gold { color: #8e6e1e; }
+  html.light .hl-magenta { color: #be185d; }
+
   .label-pill {
     @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em];
     border-color: rgb(255 255 255 / 0.1);

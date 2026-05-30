@@ -2,19 +2,37 @@ import { motion } from "framer-motion";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { profile, skillGroups, stats } from "../data/profile";
 import { SectionHead } from "./SectionHead";
-import { SriYantra, OmGlyph, CornerBracket } from "./decor/Motifs";
+import { SriYantra, ChakraWheel, OmGlyph, CornerBracket } from "./decor/Motifs";
 import { Counter } from "./Counter";
 
-function renderMarkdownLite(text: string) {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
-  return parts.map((part, i) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return (
-        <strong key={i} className="font-medium text-foreground">
-          {part.slice(2, -2)}
-        </strong>
-      );
-    }
+/* Color-code known entities so the bio reads designed, not flat */
+const HL_MAP: [string, string][] = [
+  ["JPMorganChase", "hl hl-cyan"],
+  ["Fresh & Select Gro", "hl hl-saffron"],
+  ["KyRo Core", "hl hl-gold"],
+  ["IIT Madras", "hl hl-cyan"],
+  ["SRM IST", "hl hl-cyan"],
+  ["Mumbai Ignite", "hl hl-magenta"],
+  ["Amazon Now", "hl hl-saffron"],
+  ["Zepto", "hl hl-saffron"],
+  ["Bhumi", "hl hl-magenta"],
+  ["Rotary Club", "hl hl-magenta"],
+];
+
+const HL_RE = new RegExp(
+  "(" + HL_MAP.map(([k]) => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")",
+  "g",
+);
+
+function highlightBio(text: string) {
+  const clean = text.replace(/\*\*/g, "");
+  return clean.split(HL_RE).map((part, i) => {
+    const hit = HL_MAP.find(([k]) => k === part);
+    if (hit) return (
+      <span key={i} className={hit[1]}>
+        {part}
+      </span>
+    );
     return <span key={i}>{part}</span>;
   });
 }
@@ -38,7 +56,7 @@ export function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="surface relative overflow-hidden rounded-lg p-7 md:col-span-2 md:row-span-2 md:p-9"
+          className="surface relative overflow-hidden rounded-lg p-8 md:col-span-2 md:row-span-2 md:p-10"
         >
           <SriYantra className="absolute -right-14 -top-14 h-56 w-56 text-saffron-400 opacity-[0.08] animate-spin-slow" />
           <div className="absolute -left-32 -bottom-32 h-72 w-72 rounded-full bg-saffron-400/8 blur-3xl" />
@@ -48,9 +66,16 @@ export function About() {
               <span aria-hidden className="h-px w-6 bg-saffron-400/60" />
               <span className="label-code text-saffron-400">DOSSIER · 01</span>
             </div>
-            <div className="mt-5 space-y-5 text-balance text-[15px] leading-[1.7] text-muted-foreground md:text-[16px]">
+
+            {/* Lead line — bigger, brighter */}
+            <p className="mt-5 font-display text-[20px] font-semibold leading-snug text-foreground md:text-[23px]">
+              I build at the intersection of{" "}
+              <span className="text-chroma">code, commerce &amp; community</span>.
+            </p>
+
+            <div className="mt-5 space-y-4 text-pretty text-[14.5px] leading-[1.75] text-muted-foreground md:text-[15.5px]">
               {profile.about.map((p, i) => (
-                <p key={i}>{renderMarkdownLite(p)}</p>
+                <p key={i}>{highlightBio(p)}</p>
               ))}
             </div>
 
@@ -69,42 +94,46 @@ export function About() {
           </div>
         </motion.div>
 
-        {/* PHOTO */}
+        {/* IDENTITY EMBLEM — replaces the duplicate photo */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-          className="surface relative overflow-hidden rounded-lg"
+          className="surface relative flex flex-col items-center justify-center overflow-hidden rounded-lg p-8"
         >
-          <CornerBracket className="absolute left-3 top-3 z-10 size-4 text-saffron-400" />
-          <CornerBracket className="absolute right-3 top-3 z-10 size-4 -scale-x-100 text-saffron-400" />
-          <CornerBracket className="absolute left-3 bottom-3 z-10 size-4 -scale-y-100 text-cyan-400" />
-          <CornerBracket className="absolute right-3 bottom-3 z-10 size-4 -scale-100 text-cyan-400" />
+          <CornerBracket className="absolute left-3 top-3 size-4 text-saffron-400" />
+          <CornerBracket className="absolute right-3 top-3 size-4 -scale-x-100 text-saffron-400" />
+          <CornerBracket className="absolute left-3 bottom-3 size-4 -scale-y-100 text-cyan-400" />
+          <CornerBracket className="absolute right-3 bottom-3 size-4 -scale-100 text-cyan-400" />
 
-          <picture>
-            <source srcSet="/images/portrait.webp" type="image/webp" />
-            <img
-              src="/images/portrait.jpg"
-              alt="Rohan Ajay Ramani"
-              className="aspect-[4/5] w-full object-cover object-[center_15%]"
-              style={{ filter: "saturate(1.06) contrast(1.05)" }}
+          {/* glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgb(255_122_38/0.12),transparent_65%)]" />
+
+          {/* layered chakra emblem */}
+          <div className="relative grid place-items-center py-6">
+            <SriYantra className="size-44 text-saffron-400/80 animate-spin-slow" style={{ animationDuration: "40s" }} />
+            <ChakraWheel
+              className="absolute size-44 text-cyan-400/40 animate-spin-reverse"
+              style={{ animationDuration: "55s" }}
             />
-          </picture>
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/90 via-background/0 to-transparent" />
-          <div className="absolute left-5 top-5 z-10">
-            <span className="label-pill text-saffron-400" style={{ borderColor: "rgb(255 122 38 / 0.4)", background: "rgb(6 6 15 / 0.55)" }}>
-              <span className="size-1.5 rounded-full bg-emerald-400" /> Mumbai · MMR
+            <span className="absolute grid size-14 place-items-center rounded-full border border-saffron-400/30 bg-background/70 backdrop-blur">
+              <OmGlyph className="text-3xl text-saffron-400" />
             </span>
           </div>
-          <div className="absolute bottom-5 left-5 right-5 z-10">
-            <p className="devanagari text-[14px] text-saffron-400">रोहन अजय रामानी</p>
-            <p className="mt-1 font-display text-xl font-bold uppercase tracking-tight text-foreground">
-              Rohan A. Ramani
-            </p>
-            <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              Engineer · Operator · Builder
-            </p>
+
+          <p className="devanagari mt-6 text-center text-[15px] text-saffron-400">
+            रोहन अजय रामानी
+          </p>
+          <p className="mt-1 text-center font-display text-xl font-bold uppercase tracking-tight text-foreground">
+            Rohan A. Ramani
+          </p>
+          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            19.0760°N · 72.8777°E
+          </p>
+          <div className="mt-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-cyan-400">
+            <span className="size-1.5 animate-glow-pulse rounded-full bg-emerald-400" />
+            Mumbai · Operating
           </div>
         </motion.div>
 
@@ -116,34 +145,39 @@ export function About() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.16 }}
           className="surface relative rounded-lg p-6"
         >
-          <OmGlyph className="absolute right-5 top-4 text-2xl text-saffron-400/25" />
           <div className="flex items-center gap-2.5">
             <MapPin className="size-4 text-saffron-400" />
-            <p className="label-code text-saffron-400">LOCATION</p>
+            <p className="label-code text-saffron-400">DIRECT LINE</p>
           </div>
-          <p className="mt-2 font-display text-2xl font-bold uppercase tracking-tight">
-            Mumbai, India
-          </p>
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-            Navi Mumbai · MMR
-          </p>
 
-          <div className="mt-5 grid gap-3 border-t border-white/10 pt-5">
+          <div className="mt-4 grid gap-3">
             <a
               href={profile.socials.email}
-              className="flex items-center gap-2 text-[13px] text-muted-foreground transition hover:text-cyan-400"
+              className="group flex items-center gap-3 text-[13px] text-muted-foreground transition hover:text-cyan-400"
             >
-              <Mail className="size-3.5" />
-              {profile.emailAddress}
+              <span className="grid h-9 w-9 flex-none place-items-center rounded-md border border-white/10 bg-white/[0.02] text-saffron-400 transition group-hover:border-cyan-400/50">
+                <Mail className="size-3.5" />
+              </span>
+              <span className="truncate">{profile.emailAddress}</span>
             </a>
             <a
               href={profile.socials.phone}
-              className="flex items-center gap-2 text-[13px] text-muted-foreground transition hover:text-cyan-400"
+              className="group flex items-center gap-3 text-[13px] text-muted-foreground transition hover:text-cyan-400"
             >
-              <Phone className="size-3.5" />
+              <span className="grid h-9 w-9 flex-none place-items-center rounded-md border border-white/10 bg-white/[0.02] text-saffron-400 transition group-hover:border-cyan-400/50">
+                <Phone className="size-3.5" />
+              </span>
               {profile.phoneNumber}
             </a>
           </div>
+
+          <a
+            href="#contact"
+            className="mt-5 flex items-center justify-between rounded-md border border-saffron-400/25 bg-saffron-400/5 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.16em] text-saffron-400 transition hover:bg-saffron-400/10"
+          >
+            Open a channel
+            <span aria-hidden>→</span>
+          </a>
         </motion.div>
       </div>
 
@@ -156,9 +190,10 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.55, delay: i * 0.04 }}
-            className="surface rounded-md p-5 text-left"
+            className="surface group relative overflow-hidden rounded-md p-5 text-left transition hover:border-saffron-400/30"
           >
-            <p className="font-display text-[28px] font-bold leading-none text-chroma">
+            <span aria-hidden className="absolute -right-4 -top-4 h-12 w-12 rounded-full bg-saffron-400/10 blur-xl opacity-0 transition group-hover:opacity-100" />
+            <p className="font-display text-[30px] font-bold leading-none text-chroma">
               <Counter value={s.value} />
             </p>
             <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -168,10 +203,10 @@ export function About() {
         ))}
       </div>
 
-      {/* Section divider line + label */}
+      {/* Divider */}
       <div className="my-16 flex items-center gap-3 text-muted-foreground md:my-20">
         <span aria-hidden className="h-px w-12 bg-saffron-400/60" />
-        <span className="label-code">STACK · INDEX</span>
+        <span className="label-code">STACK · CAPABILITY</span>
         <span aria-hidden className="h-px flex-1 bg-white/10" />
       </div>
 
@@ -189,6 +224,9 @@ export function About() {
             <h3 className="mb-5 flex items-center gap-3 font-display text-lg font-bold uppercase tracking-tight">
               <span className={`size-2 rounded-full ${group.dot}`} />
               {group.name}
+              <span className="ml-auto font-mono text-[10px] font-normal tracking-[0.16em] text-muted-foreground">
+                0{i + 1}
+              </span>
             </h3>
             <div className="flex flex-wrap gap-1.5">
               {group.chips.map((c) => (
