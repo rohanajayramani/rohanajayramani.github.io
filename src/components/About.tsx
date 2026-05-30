@@ -3,6 +3,7 @@ import { MapPin, Mail, Phone } from "lucide-react";
 import { profile, skillGroups, stats } from "../data/profile";
 import { SectionHead } from "./SectionHead";
 import { SriYantra, OmGlyph, CornerBracket } from "./decor/Motifs";
+import { Counter } from "./Counter";
 
 function renderMarkdownLite(text: string) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
@@ -155,7 +156,7 @@ export function About() {
             className="surface rounded-md p-5 text-left"
           >
             <p className="font-display text-[28px] font-bold leading-none text-chroma">
-              {s.value}
+              <Counter value={s.value} />
             </p>
             <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               {s.label}

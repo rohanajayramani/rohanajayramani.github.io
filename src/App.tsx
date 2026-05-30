@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Lenis from "@studio-freight/lenis";
 import { Ambient } from "./components/Ambient";
 import { Header } from "./components/Header";
@@ -13,9 +13,14 @@ import { Volunteering } from "./components/Volunteering";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { ScrollTop } from "./components/ScrollTop";
+import { BootLoader } from "./components/BootLoader";
+import { Cursor } from "./components/Cursor";
 
 export default function App() {
+  const [booted, setBooted] = useState(false);
+
   useEffect(() => {
+    if (!booted) return;
     const lenis = new Lenis({
       duration: 1.35,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -24,7 +29,6 @@ export default function App() {
       touchMultiplier: 1.6,
     });
 
-    // Intercept anchor clicks so smooth scroll feels intentional
     const onAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const a = target.closest("a[href^='#']") as HTMLAnchorElement | null;
@@ -47,11 +51,13 @@ export default function App() {
       document.removeEventListener("click", onAnchorClick);
       lenis.destroy();
     };
-  }, []);
+  }, [booted]);
 
   return (
     <div className="relative min-h-screen overflow-clip">
       <Ambient />
+      <Cursor />
+      <BootLoader onDone={() => setBooted(true)} />
       <Header />
       <main className="relative z-10">
         <Hero />

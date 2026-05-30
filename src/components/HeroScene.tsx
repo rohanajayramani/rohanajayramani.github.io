@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Line, OrbitControls, Points, PointMaterial } from "@react-three/drei";
+import { Float, OrbitControls, Points, PointMaterial } from "@react-three/drei";
 import { Suspense, useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -11,9 +11,20 @@ const GOLD = "#d4af37";
 
 /* Module-level triangle definitions — never re-created */
 const T = (pts: [number, number][], z: number, color: string) => {
-  const points: [number, number, number][] = pts.map(([x, y]) => [x, y, z]);
-  points.push(points[0]); // close the loop
-  return { points, color };
+  const positions = new Float32Array(pts.length * 2 * 3);
+  // Build line-segments: edges between consecutive points + closing edge
+  for (let i = 0; i < pts.length; i++) {
+    const a = pts[i];
+    const b = pts[(i + 1) % pts.length];
+    const off = i * 6;
+    positions[off] = a[0];
+    positions[off + 1] = a[1];
+    positions[off + 2] = z;
+    positions[off + 3] = b[0];
+    positions[off + 4] = b[1];
+    positions[off + 5] = z;
+  }
+  return { positions, color };
 };
 
 const TRIANGLES = [
@@ -30,6 +41,20 @@ const TRIANGLES = [
   T([[0, -0.7], [0.6, 0.2], [-0.6, 0.2]], 0.16, CYAN),
 ];
 
+/* A single line-loop triangle — uses native R3F line via createElement */
+function TriEdge({ tri }: { tri: { positions: Float32Array; color: string } }) {
+  const geom = useMemo(() => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(tri.positions, 3));
+    return g;
+  }, [tri]);
+  return (
+    <lineSegments geometry={geom}>
+      <lineBasicMaterial color={tri.color} transparent opacity={0.95} />
+    </lineSegments>
+  );
+}
+
 /* Sri Yantra — 9 interlocking triangles */
 function SriYantra3D() {
   const ref = useRef<THREE.Group>(null!);
@@ -40,7 +65,7 @@ function SriYantra3D() {
   return (
     <group ref={ref}>
       {TRIANGLES.map((t, i) => (
-        <Line key={i} points={t.points} color={t.color} lineWidth={2} transparent opacity={0.9} />
+        <TriEdge key={i} tri={t} />
       ))}
 
       {/* Outer rings */}
@@ -61,7 +86,7 @@ function SriYantra3D() {
   );
 }
 
-/* Petal ring — small spheres around the yantra */
+/* Petal ring — small spheres */
 function LotusDots({
   radius = 3.0,
   count = 16,
@@ -98,7 +123,6 @@ function LotusDots({
   );
 }
 
-/* Outer wireframe icosahedron */
 function OuterIcosa() {
   const ref = useRef<THREE.Mesh>(null!);
   useFrame((_, dt) => {
@@ -115,7 +139,6 @@ function OuterIcosa() {
   );
 }
 
-/* Star field */
 function StarField() {
   const positions = useMemo(() => {
     const arr = new Float32Array(800 * 3);
@@ -148,7 +171,7 @@ export function HeroScene() {
       dpr={[1, 1.8]}
       camera={{ position: [0, 0, 6.4], fov: 42 }}
       style={{ position: "absolute", inset: 0 }}
-      gl={{ antialias: true, alpha: true }}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
     >
       <Suspense fallback={null}>
         <ambientLight intensity={0.6} />

@@ -2,6 +2,7 @@ import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import { Suspense, lazy } from "react";
 import { profile } from "../data/profile";
 import { OmGlyph, CornerBracket } from "./decor/Motifs";
+import { Counter } from "./Counter";
 
 const HeroScene = lazy(() => import("./HeroScene").then((m) => ({ default: m.HeroScene })));
 
@@ -60,13 +61,19 @@ export function Hero() {
             रोहन अजय रामानी
           </p>
 
-          {/* MONUMENTAL NAME */}
+          {/* MONUMENTAL NAME — with chromatic glow under RAMANI */}
           <h1
-            className="hero-in font-display text-[clamp(3rem,9vw,7rem)] font-bold leading-[0.92] tracking-[-0.04em] text-foreground"
+            className="hero-in relative font-display text-[clamp(3rem,9vw,7rem)] font-bold leading-[0.92] tracking-[-0.04em] text-foreground"
             style={{ animationDelay: "120ms" }}
           >
             ROHAN<br />
-            AJAY <span className="text-chroma">RAMANI</span>
+            AJAY{" "}
+            <span className="relative inline-block">
+              <span aria-hidden className="absolute inset-0 blur-2xl opacity-60 text-chroma">
+                RAMANI
+              </span>
+              <span className="relative text-chroma">RAMANI</span>
+            </span>
           </h1>
 
           {/* TAGLINE */}
@@ -164,19 +171,25 @@ export function Hero() {
 
               <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-4">
                 <div>
-                  <p className="font-display text-[28px] font-bold leading-none text-saffron-400">2.5y</p>
+                  <p className="font-display text-[28px] font-bold leading-none text-saffron-400">
+                    <Counter value="2.5y" />
+                  </p>
                   <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                     at JPMC
                   </p>
                 </div>
                 <div>
-                  <p className="font-display text-[28px] font-bold leading-none text-cyan-400">6k+</p>
+                  <p className="font-display text-[28px] font-bold leading-none text-cyan-400">
+                    <Counter value="6k+" />
+                  </p>
                   <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                     Mumbai Ignite
                   </p>
                 </div>
                 <div>
-                  <p className="font-display text-[28px] font-bold leading-none text-magenta-400">9.76</p>
+                  <p className="font-display text-[28px] font-bold leading-none text-magenta-400">
+                    <Counter value="9.76" />
+                  </p>
                   <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                     SRM CGPA
                   </p>
