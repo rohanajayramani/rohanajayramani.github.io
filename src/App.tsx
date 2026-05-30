@@ -21,12 +21,16 @@ export default function App() {
 
   useEffect(() => {
     if (!booted) return;
+
+    // Respect reduced-motion: skip smooth scroll entirely
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const lenis = new Lenis({
-      duration: 1.35,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.1, // frame-based smoothing — tracks the wheel, no floaty lag
+      wheelMultiplier: 1,
       smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1.6,
+      touchMultiplier: 1.5,
+      syncTouch: false,
     });
 
     const onAnchorClick = (e: MouseEvent) => {
@@ -38,16 +42,18 @@ export default function App() {
       const el = document.querySelector(href);
       if (!el) return;
       e.preventDefault();
-      lenis.scrollTo(el as HTMLElement, { offset: -80, duration: 1.6 });
+      lenis.scrollTo(el as HTMLElement, { offset: -72, duration: 0.9 });
     };
     document.addEventListener("click", onAnchorClick);
 
+    let rafId = 0;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
     return () => {
+      cancelAnimationFrame(rafId);
       document.removeEventListener("click", onAnchorClick);
       lenis.destroy();
     };

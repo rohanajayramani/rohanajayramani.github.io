@@ -32,17 +32,20 @@ export function Counter({ value, duration = 1400, className }: Props) {
       const startTs = performance.now();
       const { num, prefix, suffix } = parsed.current;
       const decimals = value.includes(".") ? (value.split(".")[1].match(/^\d+/)?.[0].length ?? 0) : 0;
+      const final = `${prefix}${num.toFixed(decimals)}${suffix}`;
       const step = (now: number) => {
-        const t = Math.min(1, (now - startTs) / duration);
+        const t = Math.max(0, Math.min(1, (now - startTs) / duration));
         // ease-out cubic
         const e = 1 - Math.pow(1 - t, 3);
-        const v = num * e;
+        const v = Math.max(0, num * e);
         setDisplay(`${prefix}${v.toFixed(decimals)}${suffix}`);
         if (t < 1) requestAnimationFrame(step);
       };
       // Start from 0 immediately for a visible jump
-      setDisplay(`${parsed.current.prefix}${(0).toFixed(decimals)}${parsed.current.suffix}`);
+      setDisplay(`${prefix}${(0).toFixed(decimals)}${suffix}`);
       requestAnimationFrame(step);
+      // Safety net — guarantee the final value even if rAF stalls (backgrounded tab)
+      window.setTimeout(() => setDisplay(final), duration + 200);
     };
 
     const el = ref.current;

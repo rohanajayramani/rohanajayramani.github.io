@@ -12,30 +12,28 @@ export function Hero() {
       id="home"
       className="relative isolate min-h-[100svh] overflow-hidden pt-24 md:pt-28"
     >
-      {/* Full-bleed 3D backdrop */}
-      <div className="pointer-events-none absolute inset-0 z-0 hidden md:block">
+      {/* 3D yantra — positioned as a halo behind the portrait (right side on desktop) */}
+      <div className="pointer-events-none absolute inset-y-0 right-[-12%] z-0 hidden w-[64%] md:block">
         <Suspense fallback={null}>
           <HeroScene />
         </Suspense>
-        {/* dark vignette so foreground text reads */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/55 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-background" />
       </div>
 
-      {/* Mobile 3D — smaller, on top */}
-      <div className="pointer-events-none relative block h-[300px] w-full md:hidden">
+      {/* Mobile 3D — behind portrait at top */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 block h-[460px] w-full md:hidden">
         <Suspense fallback={null}>
           <HeroScene />
         </Suspense>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background" />
       </div>
 
-      {/* Foreground — cinematic left-aligned */}
-      <div className="container-page relative z-10 grid grid-cols-1 gap-8 pb-24 pt-10 md:grid-cols-12 md:gap-6 md:pb-32 md:pt-16">
-        <div className="md:col-span-7">
-          {/* TOP CODED BAR */}
+      <div className="container-page relative z-10 grid grid-cols-1 items-center gap-10 pb-24 pt-6 md:grid-cols-12 md:gap-8 md:pb-28 md:pt-12">
+        {/* LEFT — text */}
+        <div className="order-2 md:order-1 md:col-span-7">
+          {/* coded pills */}
           <div
-            className="hero-in mb-8 flex flex-wrap items-center gap-3 text-muted-foreground"
+            className="hero-in mb-7 flex flex-wrap items-center gap-2.5 text-muted-foreground"
             style={{ animationDelay: "0ms" }}
           >
             <span className="label-pill text-saffron-400" style={{ borderColor: "rgb(255 122 38 / 0.3)" }}>
@@ -45,15 +43,11 @@ export function Hero() {
               </span>
               Status · Available
             </span>
-            <span className="label-pill">
-              19.0760°N · 72.8777°E
-            </span>
-            <span className="label-pill">
-              Mumbai · IST
-            </span>
+            <span className="label-pill">19.0760°N · 72.8777°E</span>
+            <span className="label-pill">Mumbai · IST</span>
           </div>
 
-          {/* DEVANAGARI WHISPER */}
+          {/* devanagari whisper */}
           <p
             className="devanagari hero-in mb-3 text-[18px] text-saffron-400/80"
             style={{ animationDelay: "80ms" }}
@@ -61,9 +55,9 @@ export function Hero() {
             रोहन अजय रामानी
           </p>
 
-          {/* MONUMENTAL NAME — with chromatic glow under RAMANI */}
+          {/* monumental name */}
           <h1
-            className="hero-in relative font-display text-[clamp(3rem,9vw,7rem)] font-bold leading-[0.92] tracking-[-0.04em] text-foreground"
+            className="hero-in relative font-display text-[clamp(2.8rem,8vw,6.4rem)] font-bold leading-[0.92] tracking-[-0.04em] text-foreground"
             style={{ animationDelay: "120ms" }}
           >
             ROHAN<br />
@@ -76,41 +70,36 @@ export function Hero() {
             </span>
           </h1>
 
-          {/* TAGLINE */}
+          {/* tagline */}
           <p
-            className="hero-in mt-7 max-w-[640px] text-balance text-[17px] leading-[1.55] text-muted-foreground md:text-[18px]"
+            className="hero-in mt-7 max-w-[600px] text-balance text-[16.5px] leading-[1.55] text-muted-foreground md:text-[17.5px]"
             style={{ animationDelay: "240ms" }}
           >
             Engineer <span className="text-foreground">→</span> Operator. Currently building{" "}
             <span className="font-semibold text-foreground">Fresh &amp; Select Gro</span> and{" "}
             <span className="font-semibold text-foreground">KyRo Core</span>, fresh off 2.5+ years of{" "}
             <span className="font-semibold text-foreground">Data &amp; Tech at JPMorganChase</span>.
-            Two published papers, one academic medal, ten years of community work.
+            Two papers, one academic medal, ten years of community work.
           </p>
 
           {/* CTAs */}
           <div
-            className="hero-in mt-10 flex flex-wrap items-center gap-3"
+            className="hero-in mt-9 flex flex-wrap items-center gap-3"
             style={{ animationDelay: "320ms" }}
           >
             <a href="#experience" className="btn-primary group">
               See the Trail
               <ArrowDown className="size-4 transition group-hover:translate-y-0.5" />
             </a>
-            <a
-              href={profile.resume}
-              target="_blank"
-              rel="noopener"
-              className="btn-ghost group"
-            >
+            <a href={profile.resume} target="_blank" rel="noopener" className="btn-ghost group">
               Résumé
               <ArrowUpRight className="size-4 transition group-hover:rotate-45" />
             </a>
           </div>
 
-          {/* SOCIALS row + ID */}
+          {/* socials + stats strip */}
           <div
-            className="hero-in mt-10 flex flex-wrap items-center gap-6"
+            className="hero-in mt-9 flex flex-col gap-6"
             style={{ animationDelay: "400ms" }}
           >
             <ul className="flex items-center gap-2">
@@ -132,87 +121,82 @@ export function Hero() {
                 </li>
               ))}
             </ul>
-            <div className="label-code">
-              <span aria-hidden className="h-px w-6 bg-white/15" />
-              ID/0001 · Mumbai-born
+
+            {/* inline stats */}
+            <div className="flex items-center gap-7 border-t border-white/10 pt-5">
+              <Stat value="2.5y" label="at JPMC" tone="text-saffron-400" />
+              <span aria-hidden className="h-8 w-px bg-white/10" />
+              <Stat value="6k+" label="Mumbai Ignite" tone="text-cyan-400" />
+              <span aria-hidden className="h-8 w-px bg-white/10" />
+              <Stat value="9.76" label="SRM CGPA" tone="text-magenta-400" />
             </div>
           </div>
         </div>
 
-        {/* RIGHT — Data panel (replaces card) */}
-        <aside
-          className="hero-in relative hidden md:col-span-5 md:flex md:items-center"
-          style={{ animationDelay: "460ms" }}
-        >
-          <div className="relative ml-auto w-full max-w-[440px]">
-            {/* Corner brackets — sci-fi targeting */}
-            <CornerBracket className="absolute -left-2 -top-2 size-5 text-saffron-400" />
-            <CornerBracket className="absolute -right-2 -top-2 size-5 -scale-x-100 text-saffron-400" />
-            <CornerBracket className="absolute -left-2 -bottom-2 size-5 -scale-y-100 text-cyan-400" />
-            <CornerBracket className="absolute -right-2 -bottom-2 size-5 -scale-100 text-cyan-400" />
+        {/* RIGHT — portrait framed by the yantra halo */}
+        <div className="order-1 md:order-2 md:col-span-5">
+          <div
+            className="hero-in relative mx-auto w-full max-w-[380px]"
+            style={{ animationDelay: "200ms" }}
+          >
+            {/* corner brackets */}
+            <CornerBracket className="absolute -left-2.5 -top-2.5 z-20 size-6 text-saffron-400" />
+            <CornerBracket className="absolute -right-2.5 -top-2.5 z-20 size-6 -scale-x-100 text-saffron-400" />
+            <CornerBracket className="absolute -left-2.5 -bottom-2.5 z-20 size-6 -scale-y-100 text-cyan-400" />
+            <CornerBracket className="absolute -right-2.5 -bottom-2.5 z-20 size-6 -scale-100 text-cyan-400" />
 
-            <div className="surface scanlines noise rounded-lg p-7 shadow-2xl shadow-black/40">
-              {/* Top bar */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                <span className="label-code text-saffron-400">SYS.CURRENT</span>
-                <OmGlyph className="text-xl text-saffron-400/80" />
-              </div>
+            <div className="relative overflow-hidden rounded-xl border border-white/12 bg-ink-900/40 shadow-2xl shadow-black/50 backdrop-blur-sm">
+              {/* portrait */}
+              <picture>
+                <source srcSet="/images/portrait.webp" type="image/webp" />
+                <img
+                  src="/images/portrait.jpg"
+                  alt="Rohan Ajay Ramani"
+                  className="aspect-[4/5] w-full object-cover object-[center_15%]"
+                  style={{ filter: "contrast(1.06) saturate(1.05) brightness(0.98)" }}
+                />
+              </picture>
 
-              <h3 className="mt-4 font-display text-[26px] font-bold uppercase leading-tight tracking-tight">
-                Engineer<br />
-                <span className="text-chroma">turned Operator.</span>
-              </h3>
+              {/* theme tint — saffron from top-left, cyan from bottom-right */}
+              <div
+                className="pointer-events-none absolute inset-0 mix-blend-soft-light"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgb(255 122 38 / 0.35) 0%, transparent 45%, transparent 60%, rgb(34 211 238 / 0.30) 100%)",
+                }}
+              />
+              {/* scanlines */}
+              <div className="scanlines pointer-events-none absolute inset-0" />
+              {/* bottom fade for label */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-ink-900 via-ink-900/60 to-transparent" />
 
-              <p className="mt-3 text-[13.5px] leading-[1.6] text-muted-foreground">
-                Building <span className="text-foreground">Fresh &amp; Select Gro</span> across the
-                Mumbai Metropolitan Region · Putting{" "}
-                <span className="text-foreground">KyRo Core</span> together brick by brick.
-              </p>
-
-              <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-4">
-                <div>
-                  <p className="font-display text-[28px] font-bold leading-none text-saffron-400">
-                    <Counter value="2.5y" />
-                  </p>
-                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                    at JPMC
-                  </p>
-                </div>
-                <div>
-                  <p className="font-display text-[28px] font-bold leading-none text-cyan-400">
-                    <Counter value="6k+" />
-                  </p>
-                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                    Mumbai Ignite
-                  </p>
-                </div>
-                <div>
-                  <p className="font-display text-[28px] font-bold leading-none text-magenta-400">
-                    <Counter value="9.76" />
-                  </p>
-                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                    SRM CGPA
-                  </p>
-                </div>
-              </div>
-
-              {/* Bottom row — pulsing dots */}
-              <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
-                <span className="flex items-center gap-1.5">
+              {/* top label */}
+              <div className="absolute left-4 right-4 top-4 z-10 flex items-center justify-between">
+                <span className="label-pill text-saffron-400" style={{ borderColor: "rgb(255 122 38 / 0.4)", background: "rgb(6 6 15 / 0.6)" }}>
                   <span className="size-1.5 animate-glow-pulse rounded-full bg-emerald-400" />
-                  Signal · Open
+                  SYS · LIVE
                 </span>
-                <span>v2025.11</span>
+                <OmGlyph className="text-2xl text-saffron-400/80" />
+              </div>
+
+              {/* bottom identity */}
+              <div className="absolute inset-x-4 bottom-4 z-10">
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-400">
+                  Engineer · Operator · Builder
+                </p>
+                <p className="mt-1 font-display text-xl font-bold uppercase tracking-tight text-foreground">
+                  Mumbai, India
+                </p>
               </div>
             </div>
           </div>
-        </aside>
+        </div>
       </div>
 
-      {/* Bottom scroll cue */}
+      {/* scroll cue */}
       <a
         href="#about"
-        className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 font-mono text-[10px] uppercase tracking-[0.26em] text-muted-foreground"
+        className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 items-center gap-2 font-mono text-[10px] uppercase tracking-[0.26em] text-muted-foreground md:flex"
         style={{ animation: "scroll-cue 2.4s ease-in-out infinite" }}
       >
         <span aria-hidden className="h-px w-8 bg-saffron-400/50" />
@@ -226,14 +210,25 @@ export function Hero() {
           transform: translateY(20px);
           animation: hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
-        @keyframes hero-in {
-          to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes hero-in { to { opacity: 1; transform: translateY(0); } }
         @keyframes scroll-cue {
           0%,100% { transform: translate(-50%, 0); }
           50%     { transform: translate(-50%, 5px); }
         }
       `}</style>
     </section>
+  );
+}
+
+function Stat({ value, label, tone }: { value: string; label: string; tone: string }) {
+  return (
+    <div>
+      <p className={`font-display text-[26px] font-bold leading-none ${tone}`}>
+        <Counter value={value} />
+      </p>
+      <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+        {label}
+      </p>
+    </div>
   );
 }

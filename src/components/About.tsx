@@ -82,12 +82,15 @@ export function About() {
           <CornerBracket className="absolute left-3 bottom-3 z-10 size-4 -scale-y-100 text-cyan-400" />
           <CornerBracket className="absolute right-3 bottom-3 z-10 size-4 -scale-100 text-cyan-400" />
 
-          <img
-            src="/images/profile2.jpeg"
-            alt="Rohan Ajay Ramani"
-            className="aspect-[4/5] w-full object-cover object-[center_20%]"
-            style={{ filter: "saturate(1.1) contrast(1.05)" }}
-          />
+          <picture>
+            <source srcSet="/images/portrait.webp" type="image/webp" />
+            <img
+              src="/images/portrait.jpg"
+              alt="Rohan Ajay Ramani"
+              className="aspect-[4/5] w-full object-cover object-[center_15%]"
+              style={{ filter: "saturate(1.06) contrast(1.05)" }}
+            />
+          </picture>
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/90 via-background/0 to-transparent" />
           <div className="absolute left-5 top-5 z-10">
             <span className="label-pill text-saffron-400" style={{ borderColor: "rgb(255 122 38 / 0.4)", background: "rgb(6 6 15 / 0.55)" }}>
