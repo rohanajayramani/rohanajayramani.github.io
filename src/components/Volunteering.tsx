@@ -7,7 +7,7 @@ export function Volunteering() {
   return (
     <section id="volunteering" className="section-pad container-page">
       <SectionHead
-        num="07"
+        num="08"
         kicker="SERVICE · COMMUNITY"
         title="Off"
         titleEmphasis="The Clock"

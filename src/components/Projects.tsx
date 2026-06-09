@@ -49,13 +49,13 @@ function TiltCard({ children, className }: { children: React.ReactNode; classNam
 
 export function Projects() {
   return (
-    <section id="work" className="section-pad container-page">
+    <section id="research" className="section-pad container-page">
       <SectionHead
-        num="03"
-        kicker="WORK · RESEARCH"
-        title="Selected projects and"
-        titleEmphasis="Papers"
-        subtitle="Two published papers, IIT Madras' best-project recognition, plus my favourite SRM coursework."
+        num="04"
+        kicker="RESEARCH · WRITING"
+        title="Papers &"
+        titleEmphasis="Research"
+        subtitle="Two published papers, IIT Madras' best-project recognition, and the engineering coursework I'm proudest of."
       />
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">

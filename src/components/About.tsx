@@ -8,13 +8,18 @@ import { Counter } from "./Counter";
 /* Color-code known entities so the bio reads designed, not flat */
 const HL_MAP: [string, string][] = [
   ["JPMorganChase", "hl hl-cyan"],
-  ["Fresh & Select Gro", "hl hl-saffron"],
   ["KyRo Core", "hl hl-gold"],
+  ["KyRo Automation", "hl hl-gold"],
+  ["Fresh & Select", "hl hl-saffron"],
   ["IIT Madras", "hl hl-cyan"],
-  ["SRM IST", "hl hl-cyan"],
+  ["SRM", "hl hl-cyan"],
   ["Mumbai Ignite", "hl hl-magenta"],
-  ["Amazon Now", "hl hl-saffron"],
   ["Zepto", "hl hl-saffron"],
+  ["Blinkit", "hl hl-saffron"],
+  ["Amazon", "hl hl-saffron"],
+  ["That One Wall", "hl hl-gold"],
+  ["Silli", "hl hl-magenta"],
+  ["K-Hair", "hl hl-cyan"],
   ["Bhumi", "hl hl-magenta"],
   ["Rotary Club", "hl hl-magenta"],
 ];

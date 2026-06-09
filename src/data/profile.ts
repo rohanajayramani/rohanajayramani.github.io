@@ -1,4 +1,4 @@
-// All copy & data is sourced from Rohan's LinkedIn profile (as of May 2026)
+// All copy & data is sourced from Rohan's LinkedIn profile (as of Jun 2026)
 // + the existing portfolio. Edit here to update any section.
 
 export const profile = {
@@ -6,12 +6,12 @@ export const profile = {
   pronouns: "He/Him",
   location: "Mumbai, Maharashtra, India",
   headline:
-    "Building Fresh & Select Gro · Former Data & Tech at JPMorganChase · Quick Commerce Facilitator · BS Data Science at IIT Madras · SRM IST Academic Medalist · SuperHost at Airbnb",
+    "Director of Business Development at Fresh & Select · Building KyRo · Former Data & Tech at JPMorganChase · BS Data Science at IIT Madras · SRM IST Academic Medalist · Airbnb SuperHost",
   shortIdentity: "Engineer · Operator · Builder",
   about: [
-    "I spent 2.5+ years at JPMorganChase as a Software Development Engineer & Analyst — shipping in equities, derivatives and OTC, leading the Engineer Committee for the Software Engineer Program, and running the 6,000-strong Mumbai Ignite agile community.",
-    "Today I'm building **Fresh & Select Gro** — operating quick commerce dark stores across the Mumbai Metropolitan Region — and putting **KyRo Core** together brick by brick. In between I picked at Amazon Now and Zepto myself, because you can't build for quick commerce from a slide deck.",
-    "Alongside the work I keep one foot in the academic world (BS in Data Science from IIT Madras, B.Tech CSE-SE from SRM IST with a University Rank 3 medal), two published research papers, and ten years of community work with Bhumi and the Rotary Club.",
+    "I spent close to three years at JPMorganChase as a Software Development Engineer & Analyst — shipping across equities, derivatives and OTC, leading the Engineer Committee for the Software Engineer Program, and running the 6,000-strong Mumbai Ignite agile community.",
+    "Today I'm Director of Business Development at Fresh & Select — a quick-commerce venture I've scaled to 50,000+ app users and a growing network of dark-store franchises running under Zepto, Blinkit and Amazon — while building KyRo Core and KyRo Automation brick by brick. I picked, packed and ran store shifts inside Zepto, Amazon and Blinkit myself, because you can't build for quick commerce from a slide deck.",
+    "On the side I ship real products — That One Wall, Silli, a memorial archive for my late grandmother's poetry, and K-Hair. Alongside it all: a BS in Data Science from IIT Madras, a University Rank 3 medal from SRM, two published papers, and ten years of community work with Bhumi and the Rotary Club.",
   ],
   rotatingRoles: [
     "engineer.",
@@ -54,32 +54,64 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
+    company: "Fresh & Select Groceries",
+    role: "Director of Business Development",
+    type: "Full-time",
+    start: "Aug 2020",
+    end: "Present",
+    duration: "5 yrs 11 mo",
+    location: "Navi Mumbai · On-site",
+    bullets: [
+      "Built and scaled a quick-commerce venture to 50,000+ app users and a growing network of dark-store franchises operating under Zepto, Blinkit and Amazon.",
+      "Embedded directly in partner dark-store operations — picking, packing and store-management shifts — to reverse-engineer fulfilment workflows firsthand and ground KyRo's design in operational reality.",
+      "Architecting KyRo Automation, a Robotics-as-a-Service and AI-driven warehouse stack, and KyRo Core, an enterprise platform unifying operational and financial management across the group.",
+      "Pioneered chemical-free ozone washing for fresh produce ahead of local competitors — an early health and hygiene differentiator.",
+      "Built supplier and vendor networks for reliable, cost-effective sourcing while driving category growth through in-store and promotional campaigns.",
+    ],
+    skills: ["Business Development", "Start-ups", "Quick Commerce", "Operations", "GTM"],
+    color: "bg-emerald-400",
+  },
+  {
     company: "Zepto",
-    role: "Picker · Packer",
+    role: "Picker Packer · Founder Immersion",
     type: "Full-time",
     start: "May 2026",
-    end: "Present",
-    duration: "1 mo",
+    end: "Jun 2026",
+    duration: "2 mo",
     location: "Mumbai · On-site",
     bullets: [
-      "Field study inside Zepto's dark stores — picking, packing and shadowing operations to inform Fresh & Select's hub blueprint.",
+      "Worked live fulfilment shifts inside a Zepto dark store — studying picking, packing and dispatch flow at ground level to directly inform KyRo's warehouse-automation design.",
     ],
     skills: ["Team Management", "Team Building", "Quick Commerce Ops"],
     color: "bg-violet-400",
   },
   {
-    company: "Amazon Now",
-    role: "Store Manager · Picker Packer",
+    company: "Amazon",
+    role: "Picker Packer · Founder Immersion",
     type: "Full-time",
     start: "Apr 2026",
     end: "Apr 2026",
     duration: "1 mo",
-    location: "Mumbai",
+    location: "Mumbai · Hybrid",
     bullets: [
-      "Multi-store operations and shift-floor picking inside Amazon Now's quick commerce network — same goal as Zepto: understand the unit economics from the inside out.",
+      "Embedded in Amazon fulfilment operations to benchmark process discipline, throughput and exception handling against quick-commerce models.",
     ],
-    skills: ["Multi-Store Operations", "Store Management", "Critical Thinking"],
+    skills: ["Critical Thinking", "In-depth Analysis", "Operations"],
     color: "bg-amber-400",
+  },
+  {
+    company: "Blinkit",
+    role: "Store Manager Trainee · Founder Immersion",
+    type: "Full-time",
+    start: "Apr 2026",
+    end: "Apr 2026",
+    duration: "1 mo",
+    location: "Mumbai · On-site",
+    bullets: [
+      "Ran store-ops shifts to reverse-engineer dark-store management end to end — from inventory accuracy to rider dispatch — feeding directly into KyRo Core.",
+    ],
+    skills: ["Communication", "Business Strategy", "Store Ops"],
+    color: "bg-yellow-400",
   },
   {
     company: "JPMorganChase",
@@ -90,10 +122,10 @@ export const experiences: Experience[] = [
     duration: "1 yr 10 mo",
     location: "Mumbai · On-site",
     bullets: [
-      "Delivered projects across Equities, Derivatives, and OTC, contributing to JPMC's global markets technology ecosystem across the full software lifecycle.",
+      "Delivered projects across equities, derivatives and OTC, contributing to JPMC's global-markets technology ecosystem across the full software lifecycle.",
       "Led the Engineer Committee for the Software Engineer Program, championing initiatives that accelerated growth for early-career technologists at scale.",
-      "Sustained strong year-on-year performance, balancing reliable BAU delivery with proactive ownership of innovation.",
-      "Acted as Scrum Master and Agility Lead for my pod, lifting cadence, focus and cross-functional collaboration.",
+      "Sustained strong year-on-year performance, balancing reliable BAU delivery with proactive ownership of innovation — consistently recognised by senior leadership.",
+      "Acted as Scrum Master and Agility Lead for my pod, lifting delivery cadence, focus and cross-functional collaboration.",
       "Ran the Mumbai Ignite Community — 6,000+ technologists — curating events, learning programs and recognition, one of JPMC's most active internal communities.",
     ],
     skills: ["Java", "Data Analysis", "Agile", "Leadership", "Scrum"],
@@ -106,29 +138,28 @@ export const experiences: Experience[] = [
     start: "Jan 2024",
     end: "Jun 2024",
     duration: "6 mo",
+    location: "Mumbai · On-site",
     bullets: [
-      "Contributed to multiple accounting modernization projects while building expertise in automation and DevOps with Jenkins.",
-      "Delivered offline projects and actively supported firmwide initiatives — POWER UP, Ignite Community, the SEP events.",
-      "Secured a full-time offer within 6 months — recognised for technical delivery, adaptability and cultural impact.",
+      "Contributed to multiple accounting-modernisation projects while building expertise in automation and DevOps with Jenkins.",
+      "Delivered offline projects and supported firmwide initiatives — POWER UP, the Ignite Community and Software Engineer Program events.",
+      "Secured a full-time offer within six months — recognised for technical delivery, adaptability and cultural impact.",
     ],
     skills: ["Software Infrastructure", "Software Design", "Jenkins", "DevOps"],
     color: "bg-cyan-400",
   },
   {
-    company: "Fresh & Select Groceries",
-    role: "Non Executive Director",
-    type: "Full-time · Family business",
-    start: "Aug 2020",
-    end: "Present",
-    duration: "5 yrs 10 mo",
-    location: "Navi Mumbai",
+    company: "JPMorganChase",
+    role: "Summer Intern & Campus Hire",
+    type: "Internship",
+    start: "Jun 2023",
+    end: "2024",
+    duration: "8 mo",
+    location: "Mumbai",
     bullets: [
-      "Managing inventory across fresh produce categories for Mumbai Groceries — reducing stockouts and ensuring consistent availability for a growing customer base.",
-      "Pioneered ozone washing in the local market — a chemical-free produce cleaning process that became a hygiene differentiator ahead of competitors.",
-      "Built and run a supplier and vendor network for reliable, cost-effective sourcing, plus the in-store and promotional campaigns that grow category sales.",
+      "Joined JPMorganChase as a summer intern and campus hire — the on-ramp into the firm's global-markets technology org and a near-three-year run across engineering and community.",
     ],
-    skills: ["Business Development", "Start-ups", "Operations", "GTM"],
-    color: "bg-emerald-400",
+    skills: ["Software Engineering", "Community"],
+    color: "bg-cyan-400",
   },
   {
     company: "Airbnb",
@@ -252,6 +283,96 @@ export const projects: Project[] = [
     repo: "https://github.com/rohanajayramani/3Dify",
     doc: "https://drive.google.com/file/d/1DbVIxY6N5hCt1XmLd2rOHZ3J2emaW2of/view?usp=sharing",
     kind: "code",
+  },
+];
+
+// ── Shipped products / live builds ──────────────────────────────────────────
+export type Build = {
+  name: string;
+  category: string;
+  year: string;
+  domain?: string; // display label for the live link, e.g. "silli.vercel.app"
+  href?: string; // full URL
+  status: string; // "Live", "In production", …
+  blurb: string;
+  stack: string[];
+  glyph: string; // short mark shown on the poster
+  gradient: string; // CSS gradient for the poster band
+  accent: string; // tailwind text color for hover accents
+  span?: "wide" | "default";
+};
+
+export const builds: Build[] = [
+  {
+    name: "KyRo Core",
+    category: "Warehouse / Ops Platform",
+    year: "2026",
+    domain: "kyro.in",
+    href: "https://kyro.in",
+    status: "In production",
+    blurb:
+      "The system of record behind a quick-commerce dark-store network — headcount, attendance (selfie + OTP), payroll and payslips, KYC, expenses, leases and leadership dashboards, all in IST real time. An enterprise platform unifying operational and financial management across the KyRo group, paired with KyRo Automation's Robotics-as-a-Service stack.",
+    stack: ["Next.js 16", "React 19", "Prisma", "PostgreSQL", "Supabase", "Tailwind"],
+    glyph: "KY",
+    gradient: "linear-gradient(135deg, #ff8a3d 0%, #ec4899 70%, #22d3ee 130%)",
+    accent: "text-saffron-400",
+    span: "wide",
+  },
+  {
+    name: "That One Wall",
+    category: "Interior Design Studio",
+    year: "2026",
+    domain: "thatonewwall.com",
+    href: "https://thatonewwall.com",
+    status: "Live",
+    blurb:
+      "An editorial marketing site for an interior-design studio — biophilic imagery, a Fraunces × Inter type pairing, smooth inertia scroll and tactile scroll-reveal motion. Your space, elevated.",
+    stack: ["Next.js 16", "React 19", "Tailwind v4", "Motion", "Lenis"],
+    glyph: "TOW",
+    gradient: "linear-gradient(135deg, #a3b18a 0%, #588157 55%, #3a5a40 120%)",
+    accent: "text-emerald-400",
+  },
+  {
+    name: "Silli",
+    category: "Dating · Social",
+    year: "2026",
+    domain: "silli.vercel.app",
+    href: "https://silli.vercel.app",
+    status: "Live",
+    blurb:
+      "A dating app that throws away the swipe — real-world social mixers (board games, bachata, zero algorithms) across Mumbai, Pune and Bengaluru. Come as you are, leave with a Silli.",
+    stack: ["Next.js 16", "React 19", "Tailwind v4", "Motion"],
+    glyph: "Si",
+    gradient: "linear-gradient(135deg, #f472b6 0%, #a855f7 60%, #6366f1 120%)",
+    accent: "text-pink-400",
+  },
+  {
+    name: "Kalpana Ramani",
+    category: "Memorial · Poetry Archive",
+    year: "2026",
+    domain: "kalpanaramani.com",
+    href: "https://kalpanaramani.com",
+    status: "Live",
+    blurb:
+      "A living memorial and digital archive for my late grandmother, the poet Shrimati Kalpana Ramani — her Geet, Navgeet and Sindhi ghazals, a daily verse, and a guestbook to leave a memory.",
+    stack: ["Astro", "TypeScript"],
+    glyph: "क",
+    gradient: "linear-gradient(135deg, #fbbf24 0%, #f59e0b 55%, #b45309 120%)",
+    accent: "text-amber-400",
+  },
+  {
+    name: "K-Hair",
+    category: "Healthcare · Commerce",
+    year: "2026",
+    domain: "k-hair.vercel.app",
+    href: "https://k-hair.vercel.app",
+    status: "Live",
+    blurb:
+      "A brand site for a hair atelier crafting real-human-hair wigs since 1980 — including chemotherapy wigs that help cancer fighters feel like themselves again. Handfinished in Mumbai, with a Three.js hero.",
+    stack: ["Next.js 16", "React 19", "Three.js", "Tailwind v4", "Drizzle"],
+    glyph: "KH",
+    gradient: "linear-gradient(135deg, #2dd4bf 0%, #0891b2 60%, #155e75 120%)",
+    accent: "text-cyan-400",
   },
 ];
 
@@ -402,24 +523,27 @@ export const skillGroups = [
 
 export const marqueeItems = [
   "JPMorganChase",
-  "Fresh & Select Gro",
+  "Fresh & Select",
+  "KyRo",
   "IIT Madras",
   "SRM IST",
   "Mumbai Ignite",
-  "Airbnb Superhost",
-  "Amazon Now",
   "Zepto",
+  "Blinkit",
+  "Amazon",
+  "That One Wall",
+  "Silli",
+  "K-Hair",
+  "Airbnb Superhost",
   "Bhumi",
   "Rotary",
-  "Microsoft Learn Student Ambassadors",
-  "Adani Wilmar",
 ];
 
 export const stats = [
-  { label: "Years at JPMC", value: "2.5+" },
+  { label: "Years at JPMC", value: "3" },
   { label: "Mumbai Ignite community", value: "6k+" },
-  { label: "LinkedIn followers", value: "8k+" },
+  { label: "Quick-commerce users", value: "50k+" },
+  { label: "Live products shipped", value: "5" },
   { label: "Papers published", value: "2" },
   { label: "SRM University rank", value: "3" },
-  { label: "Years volunteering", value: "9+" },
 ];

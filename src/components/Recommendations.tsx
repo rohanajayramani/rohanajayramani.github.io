@@ -7,7 +7,7 @@ export function Recommendations() {
   return (
     <section id="recommendations" className="section-pad container-page">
       <SectionHead
-        num="06"
+        num="07"
         kicker="VOUCHED · ENDORSEMENTS"
         title="In their"
         titleEmphasis="words"

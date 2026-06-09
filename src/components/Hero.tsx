@@ -77,11 +77,11 @@ export function Hero() {
           >
             <span className="font-semibold text-foreground">Engineer</span>
             <span className="mx-1.5 text-saffron-400">→</span>
-            <span className="font-semibold text-foreground">Operator</span>. Currently building{" "}
-            <span className="hl hl-saffron">Fresh &amp; Select Gro</span> and{" "}
-            <span className="hl hl-gold">KyRo Core</span>, fresh off 2.5+ years of{" "}
-            <span className="hl hl-cyan">Data &amp; Tech at JPMorganChase</span>. Two papers, one
-            academic medal, ten years of community work.
+            <span className="font-semibold text-foreground">Operator</span>. Director of Business
+            Development at <span className="hl hl-saffron">Fresh &amp; Select</span>, building{" "}
+            <span className="hl hl-gold">KyRo</span>, fresh off three years of{" "}
+            <span className="hl hl-cyan">Data &amp; Tech at JPMorganChase</span>. Five products shipped,
+            two papers published, one academic medal.
           </p>
 
           {/* CTAs */}
@@ -126,7 +126,7 @@ export function Hero() {
 
             {/* inline stats */}
             <div className="flex items-center gap-7 border-t border-white/10 pt-5">
-              <Stat value="2.5y" label="at JPMC" tone="text-saffron-400" />
+              <Stat value="3y" label="at JPMC" tone="text-saffron-400" />
               <span aria-hidden className="h-8 w-px bg-white/10" />
               <Stat value="6k+" label="Mumbai Ignite" tone="text-cyan-400" />
               <span aria-hidden className="h-8 w-px bg-white/10" />
