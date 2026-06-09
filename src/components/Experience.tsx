@@ -50,7 +50,8 @@ export function Experience() {
               <div className="flex flex-wrap items-baseline justify-between gap-3">
                 <div>
                   <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-saffron-400">
-                    {exp.start} — {exp.end}
+                    {exp.start}
+                    {exp.end !== exp.start && ` — ${exp.end}`}
                     {exp.duration && (
                       <span className="ml-2 text-muted-foreground">· {exp.duration}</span>
                     )}

@@ -9,7 +9,7 @@ export function Honors() {
   return (
     <section id="honors" className="section-pad container-page">
       <SectionHead
-        num="05"
+        num="06"
         kicker="HONORS · MEDALS"
         title="Recognised"
         titleEmphasis="Work"

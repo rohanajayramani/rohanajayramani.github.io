@@ -7,7 +7,7 @@ export function Education() {
   return (
     <section id="education" className="section-pad container-page">
       <SectionHead
-        num="04"
+        num="05"
         kicker="ROOTS · LEARNING"
         title="Where I"
         titleEmphasis="Learned"

@@ -7,8 +7,9 @@ const navItems = [
   { num: "01", href: "#about", label: "Index" },
   { num: "02", href: "#experience", label: "Trail" },
   { num: "03", href: "#work", label: "Work" },
-  { num: "04", href: "#education", label: "Roots" },
-  { num: "05", href: "#contact", label: "Signal" },
+  { num: "04", href: "#research", label: "Lab" },
+  { num: "05", href: "#education", label: "Roots" },
+  { num: "06", href: "#contact", label: "Signal" },
 ];
 
 export function Header() {

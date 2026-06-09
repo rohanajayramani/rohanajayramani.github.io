@@ -6,6 +6,7 @@ import { Hero } from "./components/Hero";
 import { Marquee } from "./components/Marquee";
 import { About } from "./components/About";
 import { Experience } from "./components/Experience";
+import { Builds } from "./components/Builds";
 import { Projects } from "./components/Projects";
 import { Education } from "./components/Education";
 import { Honors } from "./components/Honors";
@@ -79,6 +80,7 @@ export default function App() {
         <Marquee />
         <About />
         <Experience />
+        <Builds />
         <Projects />
         <Education />
         <Honors />

@@ -22,7 +22,7 @@ export function Contact() {
   return (
     <section id="contact" className="section-pad container-page">
       <SectionHead
-        num="08"
+        num="09"
         kicker="SIGNAL · CONTACT"
         title="Let's build"
         titleEmphasis="Something"
