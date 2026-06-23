@@ -363,6 +363,8 @@ export const builds: Build[] = [
     name: "Fresh & Select",
     category: "Quick Commerce · Company Site",
     year: "2026",
+    domain: "freshandselect.com",
+    href: "https://freshandselect.com",
     status: "Live",
     blurb:
       "The marketing site for the quick-commerce venture I help run — we engineer and operate the dark stores behind India's biggest quick-commerce platforms, with 25 hubs live across the Mumbai Metropolitan Region and more incoming.",
@@ -376,6 +378,8 @@ export const builds: Build[] = [
     name: "DE VIEW",
     category: "Corporate Events · Agency",
     year: "2026",
+    domain: "de-view-theta.vercel.app",
+    href: "https://de-view-theta.vercel.app",
     status: "Live",
     blurb:
       "An editorial site for DE VIEW LLP, a corporate-events agency — conferences, product launches, employee-engagement programmes, award ceremonies and brand activations, each run of show built to reflect the brand and deliver measurable results.",
