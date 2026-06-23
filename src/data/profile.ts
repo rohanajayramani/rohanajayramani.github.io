@@ -10,7 +10,7 @@ export const profile = {
   shortIdentity: "Engineer · Operator · Builder",
   about: [
     "I spent close to three years at JPMorganChase as a Software Development Engineer & Analyst — shipping across equities, derivatives and OTC, leading the Engineer Committee for the Software Engineer Program, and running the 6,000-strong Mumbai Ignite agile community.",
-    "Today I'm Director of Business Development at Fresh & Select — a quick-commerce venture I've scaled to 50,000+ app users and a growing network of dark-store franchises running under Zepto, Blinkit and Amazon — while building KyRo Core and KyRo Automation brick by brick. I picked, packed and ran store shifts inside Zepto, Amazon and Blinkit myself, because you can't build for quick commerce from a slide deck.",
+    "Today I'm Director of Business Development at Fresh & Select — a quick-commerce venture I've scaled to 50,000+ app users and a growing network of dark-store franchises running under Zepto, Blinkit and Amazon — while building KyRo One and KyRo Automation brick by brick. I picked, packed and ran store shifts inside Zepto, Amazon and Blinkit myself, because you can't build for quick commerce from a slide deck.",
     "On the side I ship real products — That One Wall, Silli, a memorial archive for my late grandmother's poetry, and K-Hair. Alongside it all: a BS in Data Science from IIT Madras, a University Rank 3 medal from SRM, two published papers, and ten years of community work with Bhumi and the Rotary Club.",
   ],
   rotatingRoles: [
@@ -64,7 +64,7 @@ export const experiences: Experience[] = [
     bullets: [
       "Built and scaled a quick-commerce venture to 50,000+ app users and a growing network of dark-store franchises operating under Zepto, Blinkit and Amazon.",
       "Embedded directly in partner dark-store operations — picking, packing and store-management shifts — to reverse-engineer fulfilment workflows firsthand and ground KyRo's design in operational reality.",
-      "Architecting KyRo Automation, a Robotics-as-a-Service and AI-driven warehouse stack, and KyRo Core, an enterprise platform unifying operational and financial management across the group.",
+      "Architecting KyRo Automation, a Robotics-as-a-Service and AI-driven warehouse stack, and KyRo One, an enterprise platform unifying operational and financial management across the group.",
       "Pioneered chemical-free ozone washing for fresh produce ahead of local competitors — an early health and hygiene differentiator.",
       "Built supplier and vendor networks for reliable, cost-effective sourcing while driving category growth through in-store and promotional campaigns.",
     ],
@@ -108,7 +108,7 @@ export const experiences: Experience[] = [
     duration: "1 mo",
     location: "Mumbai · On-site",
     bullets: [
-      "Ran store-ops shifts to reverse-engineer dark-store management end to end — from inventory accuracy to rider dispatch — feeding directly into KyRo Core.",
+      "Ran store-ops shifts to reverse-engineer dark-store management end to end — from inventory accuracy to rider dispatch — feeding directly into KyRo One.",
     ],
     skills: ["Communication", "Business Strategy", "Store Ops"],
     color: "bg-yellow-400",
@@ -296,27 +296,94 @@ export type Build = {
   status: string; // "Live", "In production", …
   blurb: string;
   stack: string[];
-  glyph: string; // short mark shown on the poster
-  gradient: string; // CSS gradient for the poster band
+  glyph: string; // short mark shown on the poster (fallback when no image)
+  gradient: string; // CSS gradient for the poster band (fallback when no image)
   accent: string; // tailwind text color for hover accents
+  image?: string; // real product screenshot; replaces the gradient/glyph poster
   span?: "wide" | "default";
 };
 
 export const builds: Build[] = [
   {
-    name: "KyRo Core",
-    category: "Warehouse / Ops Platform",
+    name: "KyRo One",
+    category: "Dark-Store Command Centre",
     year: "2026",
     domain: "kyro.in",
     href: "https://kyro.in",
     status: "In production",
     blurb:
-      "The system of record behind a quick-commerce dark-store network — headcount, attendance (selfie + OTP), payroll and payslips, KYC, expenses, leases and leadership dashboards, all in IST real time. An enterprise platform unifying operational and financial management across the KyRo group, paired with KyRo Automation's Robotics-as-a-Service stack.",
-    stack: ["Next.js 16", "React 19", "Prisma", "PostgreSQL", "Supabase", "Tailwind"],
+      "One platform, three faces. The enterprise command centre behind a quick-commerce dark-store network — real-time attendance, order tracking, CPO management and financial controls across 50+ locations, all in IST. KyRo One splits into Vault (accounting), Apex (leadership) and Pulse (store ops), each a role-gated view on the same system of record, paired with KyRo Automation's Robotics-as-a-Service stack.",
+    stack: ["Next.js 16", "React 19", "Prisma", "PostgreSQL", "Supabase", "Tailwind v4"],
     glyph: "KY",
-    gradient: "linear-gradient(135deg, #ff8a3d 0%, #ec4899 70%, #22d3ee 130%)",
-    accent: "text-saffron-400",
+    gradient: "linear-gradient(135deg, #34d399 0%, #059669 60%, #064e3b 120%)",
+    accent: "text-emerald-400",
+    image: "/images/builds/kyro-one.webp",
     span: "wide",
+  },
+  {
+    name: "KyRo Vault",
+    category: "KyRo One · Accounting",
+    year: "2026",
+    status: "In production",
+    blurb:
+      "The finance core of KyRo One — disbursements, vendor invoices with GST + TDS, reimbursements, store expenses, mathadi logs, rent payments and per-entity bank balances, reconciled across the group in real time.",
+    stack: ["Next.js 16", "React 19", "Prisma", "PostgreSQL"],
+    glyph: "KV",
+    gradient: "linear-gradient(135deg, #fbbf24 0%, #f59e0b 60%, #b45309 120%)",
+    accent: "text-amber-400",
+    image: "/images/builds/kyro-vault.webp",
+  },
+  {
+    name: "KyRo Apex",
+    category: "KyRo One · Leadership",
+    year: "2026",
+    status: "In production",
+    blurb:
+      "The super-admin layer for upper management — a platform-wide live dashboard with order and CPO targets vs actuals, budget allocation, SLA alerts, approvals and reporting lines, every action audit-logged.",
+    stack: ["Next.js 16", "React 19", "Prisma", "PostgreSQL"],
+    glyph: "KA",
+    gradient: "linear-gradient(135deg, #a78bfa 0%, #7c3aed 60%, #4c1d95 120%)",
+    accent: "text-violet-400",
+    image: "/images/builds/kyro-apex.webp",
+  },
+  {
+    name: "KyRo Pulse",
+    category: "KyRo One · Store Ops",
+    year: "2026",
+    status: "In production",
+    blurb:
+      "The cluster-level cockpit for store managers — roster, OT and ad-hoc attendance approvals, geo check-ins, governance queues and performance reviews, with target vs actual CPO tracked per store.",
+    stack: ["Next.js 16", "React 19", "Prisma", "PostgreSQL"],
+    glyph: "KP",
+    gradient: "linear-gradient(135deg, #f0abfc 0%, #d946ef 60%, #86198f 120%)",
+    accent: "text-fuchsia-400",
+    image: "/images/builds/kyro-pulse.webp",
+  },
+  {
+    name: "Fresh & Select",
+    category: "Quick Commerce · Company Site",
+    year: "2026",
+    status: "Live",
+    blurb:
+      "The marketing site for the quick-commerce venture I help run — we engineer and operate the dark stores behind India's biggest quick-commerce platforms, with 25 hubs live across the Mumbai Metropolitan Region and more incoming.",
+    stack: ["Next.js 16", "React 19", "Tailwind v4", "Motion"],
+    glyph: "FS",
+    gradient: "linear-gradient(135deg, #a3b18a 0%, #588157 55%, #3a5a40 120%)",
+    accent: "text-emerald-400",
+    image: "/images/builds/fresh-select.webp",
+  },
+  {
+    name: "DE VIEW",
+    category: "Corporate Events · Agency",
+    year: "2026",
+    status: "Live",
+    blurb:
+      "An editorial site for DE VIEW LLP, a corporate-events agency — conferences, product launches, employee-engagement programmes, award ceremonies and brand activations, each run of show built to reflect the brand and deliver measurable results.",
+    stack: ["Next.js 16", "React 19", "Tailwind v4", "Motion"],
+    glyph: "DV",
+    gradient: "linear-gradient(135deg, #60a5fa 0%, #2563eb 60%, #1e3a8a 120%)",
+    accent: "text-blue-400",
+    image: "/images/builds/deview.webp",
   },
   {
     name: "That One Wall",
@@ -345,20 +412,22 @@ export const builds: Build[] = [
     glyph: "Si",
     gradient: "linear-gradient(135deg, #f472b6 0%, #a855f7 60%, #6366f1 120%)",
     accent: "text-pink-400",
+    image: "/images/builds/silli.webp",
   },
   {
-    name: "Kalpana Ramani",
-    category: "Memorial · Poetry Archive",
+    name: "Tiny Room Concert",
+    category: "Live Music · Community",
     year: "2026",
-    domain: "kalpanaramani.com",
-    href: "https://kalpanaramani.com",
+    domain: "tiny-room-concert.vercel.app",
+    href: "https://tiny-room-concert.vercel.app",
     status: "Live",
     blurb:
-      "A living memorial and digital archive for my late grandmother, the poet Shrimati Kalpana Ramani — her Geet, Navgeet and Sindhi ghazals, a daily verse, and a guestbook to leave a memory.",
-    stack: ["Astro", "TypeScript"],
-    glyph: "क",
-    gradient: "linear-gradient(135deg, #fbbf24 0%, #f59e0b 55%, #b45309 120%)",
-    accent: "text-amber-400",
+      "A living room turned concert space in Mumbai — invite-only gigs, stripped-down sets and conversations that run long after the last song. A tiny room, a whole room of people.",
+    stack: ["Next.js 16", "React 19", "Tailwind v4", "Motion"],
+    glyph: "TR",
+    gradient: "linear-gradient(135deg, #fb923c 0%, #ea580c 60%, #7c2d12 120%)",
+    accent: "text-orange-400",
+    image: "/images/builds/tiny-room.webp",
   },
   {
     name: "K-Hair",
@@ -373,6 +442,22 @@ export const builds: Build[] = [
     glyph: "KH",
     gradient: "linear-gradient(135deg, #2dd4bf 0%, #0891b2 60%, #155e75 120%)",
     accent: "text-cyan-400",
+    image: "/images/builds/khair.webp",
+  },
+  {
+    name: "Kalpana Ramani",
+    category: "Memorial · Poetry Archive",
+    year: "2026",
+    domain: "kalpanaramani.com",
+    href: "https://kalpanaramani.com",
+    status: "Live",
+    blurb:
+      "A living memorial and digital archive for my late grandmother, the poet Shrimati Kalpana Ramani — her Geet, Navgeet and Sindhi ghazals, a daily verse, and a guestbook to leave a memory.",
+    stack: ["Astro", "TypeScript"],
+    glyph: "क",
+    gradient: "linear-gradient(135deg, #fbbf24 0%, #f59e0b 55%, #b45309 120%)",
+    accent: "text-amber-400",
+    image: "/images/builds/kalpana.webp",
   },
 ];
 
@@ -532,7 +617,9 @@ export const marqueeItems = [
   "Blinkit",
   "Amazon",
   "That One Wall",
+  "DE VIEW",
   "Silli",
+  "Tiny Room Concert",
   "K-Hair",
   "Airbnb Superhost",
   "Bhumi",
@@ -543,7 +630,7 @@ export const stats = [
   { label: "Years at JPMC", value: "3" },
   { label: "Mumbai Ignite community", value: "6k+" },
   { label: "Quick-commerce users", value: "50k+" },
-  { label: "Live products shipped", value: "5" },
+  { label: "Live products shipped", value: "8" },
   { label: "Papers published", value: "2" },
   { label: "SRM University rank", value: "3" },
 ];
