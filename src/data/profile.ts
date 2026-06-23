@@ -402,6 +402,7 @@ export const builds: Build[] = [
     glyph: "TOW",
     gradient: "linear-gradient(135deg, #a3b18a 0%, #588157 55%, #3a5a40 120%)",
     accent: "text-emerald-400",
+    image: "/images/builds/thatonewwall.webp",
   },
   {
     name: "Silli",
