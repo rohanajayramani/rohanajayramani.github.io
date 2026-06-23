@@ -50,7 +50,7 @@ export function Builds() {
         kicker="STUDIO · SHIPPED"
         title="Things I've"
         titleEmphasis="Shipped"
-        subtitle="Live products from the last year — a quick-commerce ops platform, an interior-design studio, a dating app, a memorial poetry archive, and a hair atelier. Built, deployed, in the wild."
+        subtitle="Live products from the last year — KyRo One (the command centre behind a quick-commerce dark-store network), the venture's own site, a corporate-events agency, an interior-design studio, a real-world dating club, an invite-only concert series, a hair atelier, and a memorial poetry archive. Built, deployed, in the wild."
       />
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
@@ -76,41 +76,71 @@ export function Builds() {
                   <div
                     className={cn(
                       "relative flex shrink-0 items-center justify-center overflow-hidden",
-                      wide ? "h-40 md:h-auto md:w-[42%]" : "h-36",
+                      wide ? "h-52 md:h-auto md:w-[46%]" : "h-44",
                     )}
-                    style={{ backgroundImage: b.gradient }}
+                    style={b.image ? undefined : { backgroundImage: b.gradient }}
                   >
-                    <div
-                      aria-hidden
-                      className="absolute inset-0 mix-blend-overlay opacity-40"
-                      style={{
-                        background:
-                          "radial-gradient(120% 120% at 28% 18%, rgba(255,255,255,0.7), transparent 55%)",
-                      }}
-                    />
-                    <div aria-hidden className="scanlines pointer-events-none absolute inset-0 opacity-30" />
-                    <CornerBracket className="absolute left-3 top-3 size-4 text-black/50" />
-                    <CornerBracket className="absolute right-3 top-3 size-4 -scale-x-100 text-black/50" />
+                    {b.image ? (
+                      <>
+                        {/* real product screenshot */}
+                        <img
+                          src={b.image}
+                          alt={`${b.name} — product screenshot`}
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 h-full w-full object-cover object-top transition duration-700 ease-out group-hover:scale-[1.04]"
+                        />
+                        <div
+                          aria-hidden
+                          className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-black/10"
+                        />
+                        <CornerBracket className="absolute left-3 top-3 size-4 text-white/75" />
+                        <CornerBracket className="absolute right-3 top-3 size-4 -scale-x-100 text-white/75" />
 
-                    <span
-                      className={cn(
-                        "relative select-none font-display font-black uppercase tracking-tight text-black/85",
-                        wide ? "text-6xl md:text-7xl" : "text-5xl",
-                        isDevanagari(b.glyph) && "devanagari font-bold normal-case",
-                      )}
-                      style={{ textShadow: "0 2px 24px rgb(0 0 0 / 0.18)" }}
-                    >
-                      {b.glyph}
-                    </span>
+                        {/* live status */}
+                        <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-sm border border-white/20 bg-black/40 px-2 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.16em] text-white/90 backdrop-blur-sm">
+                          <span className="relative grid h-1.5 w-1.5 place-items-center">
+                            <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/60" />
+                            <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                          </span>
+                          {b.status}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <div
+                          aria-hidden
+                          className="absolute inset-0 mix-blend-overlay opacity-40"
+                          style={{
+                            background:
+                              "radial-gradient(120% 120% at 28% 18%, rgba(255,255,255,0.7), transparent 55%)",
+                          }}
+                        />
+                        <div aria-hidden className="scanlines pointer-events-none absolute inset-0 opacity-30" />
+                        <CornerBracket className="absolute left-3 top-3 size-4 text-black/50" />
+                        <CornerBracket className="absolute right-3 top-3 size-4 -scale-x-100 text-black/50" />
 
-                    {/* live status */}
-                    <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-sm border border-black/20 bg-black/15 px-2 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.16em] text-black/80 backdrop-blur-sm">
-                      <span className="relative grid h-1.5 w-1.5 place-items-center">
-                        <span className="absolute inset-0 animate-ping rounded-full bg-black/40" />
-                        <span className="relative h-1.5 w-1.5 rounded-full bg-black/70" />
-                      </span>
-                      {b.status}
-                    </span>
+                        <span
+                          className={cn(
+                            "relative select-none font-display font-black uppercase tracking-tight text-black/85",
+                            wide ? "text-6xl md:text-7xl" : "text-5xl",
+                            isDevanagari(b.glyph) && "devanagari font-bold normal-case",
+                          )}
+                          style={{ textShadow: "0 2px 24px rgb(0 0 0 / 0.18)" }}
+                        >
+                          {b.glyph}
+                        </span>
+
+                        {/* live status */}
+                        <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-sm border border-black/20 bg-black/15 px-2 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.16em] text-black/80 backdrop-blur-sm">
+                          <span className="relative grid h-1.5 w-1.5 place-items-center">
+                            <span className="absolute inset-0 animate-ping rounded-full bg-black/40" />
+                            <span className="relative h-1.5 w-1.5 rounded-full bg-black/70" />
+                          </span>
+                          {b.status}
+                        </span>
+                      </>
+                    )}
                   </div>
 
                   {/* BODY */}
