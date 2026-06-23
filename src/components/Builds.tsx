@@ -126,14 +126,16 @@ function BuildCover({ b, wide }: { b: Build; wide: boolean }) {
       {/* the screenshot, framed as a browser window peeking up from the band */}
       <div
         className={cn(
-          "absolute z-10 transition-transform duration-500 ease-out group-hover:-translate-y-1.5",
+          "absolute z-10 [perspective:1200px]",
           wide
-            ? "bottom-[-15%] left-7 right-[-7%] top-[16%]"
-            : "bottom-[-19%] left-5 right-[-9%] top-[31%]",
+            ? "bottom-[-15%] left-7 right-[-7%] top-[13%]"
+            : "bottom-[-19%] left-5 right-[-9%] top-[27%]",
         )}
       >
-        <div className="flex h-full w-full flex-col overflow-hidden rounded-t-xl border border-white/15 bg-[#0b0e14] shadow-[0_26px_60px_-20px_rgba(0,0,0,0.75)] ring-1 ring-black/20">
-          <div className="flex h-6 shrink-0 items-center gap-1.5 border-b border-white/10 bg-white/[0.04] px-3">
+        <div className="relative flex h-full w-full origin-top flex-col overflow-hidden rounded-t-xl border border-white/15 bg-[#0b0e14] shadow-[0_30px_70px_-24px_rgba(0,0,0,0.85)] ring-1 ring-black/20 transition-transform duration-500 ease-out [transform:rotateX(7deg)] group-hover:[transform:rotateX(0deg)_translateY(-6px)]">
+          {/* glassy top edge */}
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 z-20 h-px bg-white/30" />
+          <div className="flex h-6 shrink-0 items-center gap-1.5 border-b border-white/10 bg-white/[0.05] px-3">
             <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
             <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
             <span className="h-1.5 w-1.5 rounded-full bg-white/20" />
